@@ -1,0 +1,24 @@
+body {
+    font-family: consolas;
+}
+
+.content-inner {
+    max-width: 480px;
+    box-shadow: 0 0 30px rgba(7, 51, 84, 0.17);
+}
+
+.content {
+    padding: 5.5%;
+    border-radius: 0 0 3px 3px;
+}
+
+.white {
+    color: white;
+}
+
+.head-content {
+    height: 100%;
+    padding: 16px 0;
+    background: #3f1052;
+    border-radius: 3px 3px 0 0;
+}
