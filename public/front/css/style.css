@@ -1,10 +1,18 @@
 body {
-    font-family: consolas;
+    font-family: 'Poppins', sans-serif;
+}
+
+.shadow {
+    box-shadow: 0 0 30px rgba(7, 51, 84, 0.17);
+}
+
+.nav-cus {
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
 
 .content-inner {
     max-width: 480px;
-    box-shadow: 0 0 30px rgba(7, 51, 84, 0.17);
 }
 
 .content {

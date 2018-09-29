@@ -19,4 +19,8 @@ Route::get('/form-login', function () {
     return view('front.auth.form-login');
 });
 
+Route::get('/dashboard', function () {
+    return view('front.dashboard.home');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
