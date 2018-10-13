@@ -7,6 +7,7 @@ use Sastrawi\Tokenizer\TokenizerFactory;
 use Wamania\Snowball\English;
 use App\Model\User;
 use DB;
+use BigShark\SQLToBuilder\BuilderClass;
 
 class HomeController extends Controller
 {
@@ -14,21 +15,123 @@ class HomeController extends Controller
     {
         $stem = new English;
         $stem = $stem->stem('loved');
-        print_r($stem.'<br>');
 
+        $getAll = new HomeController();
+        print_r($getAll->toTermTf());
+    }
+
+    public function getUser() {
+        $user = DB::select('SELECT * from tb_users WHERE id = ?', array(1));
+
+        foreach($user as $users) {
+            $id = $users->id;
+        }
+
+        return $id;
+    }
+
+    public function getFilm() {
+        $film = DB::select('SELECT * from tb_film');
+
+        return $film;
+    }
+
+    public function getIdFilm() {
+        $film = DB::select('SELECT * from tb_film');
+        $tokenisasi = new TokenizerFactory;
+        $tokenizer = $tokenisasi->createDefaultTokenizer();
+
+        foreach($film as $films) {
+           $id_film = $tokenizer->tokenize($films->id);  
+        }
+
+        return $id_film;
+    }
+
+    public function mergeUser() {
         $tokenisasi = new TokenizerFactory;
         $tokenizer = $tokenisasi->createDefaultTokenizer();
         
-        $userAll = User::all('nama_film_liked', 'genre_film_liked');
-        // $res = DB::select('SELECT genre_film_liked from tb_users WHERE id = ?', array(1));
-        $res = DB::select('SELECT * from tb_users WHERE id = ?', array(1));
+        $user = DB::select('SELECT * from tb_users WHERE id = ?', array(1));
 
-        foreach($res as $user) {
-            $nama_film = $tokenizer->tokenize($user->nama_film_liked);
-            $genre_film = $tokenizer->tokenize($user->genre_film_liked);
+        foreach($user as $users) {
+            $nama_film = $tokenizer->tokenize($users->nama_film_liked);
+            $genre_film = $tokenizer->tokenize($users->genre_film_liked);
             
-            $mer = array_merge($nama_film, $genre_film);
-            print_r($mer);
+            $mergeAll = array_merge($nama_film, $genre_film);
+        }
+
+        return $mergeAll;
+    }
+
+    public function toTfUser() {
+        $getAll = new HomeController();
+        $term = $getAll->mergeUser();
+        $id_user = $getAll->getUser();
+
+        foreach($term as $terms) {
+            DB::insert('INSERT INTO tb_terms(id, nama_term, df, idf) values (?, ?, ?, ?)', [null, $terms, 0, 0]);
+            $getIdTerm = DB::select('SELECT * from tb_terms WHERE nama_term = ?', array($terms));
+
+            foreach($getIdTerm as $getIdTerms) {
+                $id_term = $getIdTerms->id;
+            }
+
+            DB::insert('INSERT INTO tb_tf_idf(id, id_film, id_user, id_term, tf, tf_idf, tf_idf_kuadrat) values(?, ?, ?, ?, ?, ?, ?)', [null, 0, $id_user, $id_term, 1, 0, 0]);
+        }
+    }
+
+    public function toTermTf() {
+        $getAll = new HomeController();
+        $term = $getAll->mergeUser();
+        $id_user = $getAll->getUser();
+        $getFilm = $getAll->getFilm();
+        $getAll->toTfUser();
+
+        foreach($getFilm as $allFilm) {
+            $tokenisasi = new TokenizerFactory;
+            $tokenizer = $tokenisasi->createDefaultTokenizer();
+            
+            $id_film = $allFilm->id;
+            $deskripsi_film = $allFilm->deskripsi_film;
+            $termFilm = $tokenizer->tokenize($deskripsi_film);
+            foreach($termFilm as $terms) {
+                if(strlen($terms) !== 0) {
+                    $cekTerm = DB::table('tb_terms')->where('nama_term', $terms)->count();
+    
+                    if($cekTerm == 0) {
+                        $term = DB::insert('INSERT INTO tb_terms(id, nama_term, df, idf) values (?, ?, ?, ?)', [null, $terms, 0, 0]);
+                        $getIdTerm = DB::select('SELECT * from tb_terms WHERE nama_term = ?', array($terms));
+    
+                        foreach($getIdTerm as $getIdTerms) {
+                            $id_term = $getIdTerms->id;
+                        }
+    
+                        DB::insert('INSERT INTO tb_tf_idf(id, id_film, id_user, id_term, tf, tf_idf, tf_idf_kuadrat) values(?, ?, ?, ?, ?, ?, ?)', [null, $id_film, 0, $id_term, 1, 0, 0]);
+                    } else {
+                        $getIdTerm = DB::select('SELECT * from tb_terms WHERE nama_term = ?', array($terms));
+    
+                        foreach($getIdTerm as $getIdTerms) {
+                            $id_term = $getIdTerms->id;
+                        }
+
+                        $cekTf = DB::table('tb_tf_idf')->where('id_term', '=', $id_term)->where('id_film', '=', $id_film)->count();
+                        if($cekTf == 0) {
+                            DB::insert('INSERT INTO tb_tf_idf(id, id_film, id_user, id_term, tf, tf_idf, tf_idf_kuadrat) values(?, ?, ?, ?, ?, ?, ?)', [null, $id_film, 0, $id_term, 1, 0, 0]);
+                        } else {
+                            $getTf = DB::select('SELECT * from tb_tf_idf WHERE id_term = ? AND id_film = ?', array($id_term, $id_film));
+
+                            foreach($getTf as $tf) {
+                                $frekuensi = $tf->tf;
+                                $id_tf = $tf->id;
+                            }
+
+                            $frekuensi = $frekuensi + 1;
+                            $updateTf = DB::table('tb_tf_idf')->where('id', $id_tf)->update(['tf' => $frekuensi, 'id_term' => $id_term]);
+                        }
+                    }
+                }  
+            }
         }
     }
 }
