@@ -18,6 +18,7 @@ class HomeController extends Controller
 
         $getAll = new HomeController();
         print_r($getAll->toTermTf());
+        print_r($getAll->toDfIdf());
     }
 
     public function getUser() {
@@ -97,7 +98,7 @@ class HomeController extends Controller
             $termFilm = $tokenizer->tokenize($deskripsi_film);
             foreach($termFilm as $terms) {
                 if(strlen($terms) !== 0) {
-                    $cekTerm = DB::table('tb_terms')->where('nama_term', $terms)->count();
+                    $cekTerm = DB::table('tb_terms')->where('nama_term', '=', $terms)->count();
     
                     if($cekTerm == 0) {
                         $term = DB::insert('INSERT INTO tb_terms(id, nama_term, df, idf) values (?, ?, ?, ?)', [null, $terms, 0, 0]);
@@ -127,11 +128,25 @@ class HomeController extends Controller
                             }
 
                             $frekuensi = $frekuensi + 1;
-                            $updateTf = DB::table('tb_tf_idf')->where('id', $id_tf)->update(['tf' => $frekuensi, 'id_term' => $id_term]);
+                            $updateTf = DB::table('tb_tf_idf')->where('id', '=', $id_tf)->update(['tf' => $frekuensi, 'id_term' => $id_term]);
                         }
                     }
                 }  
             }
+        }
+    }
+
+    public function toDfIdf() {
+        $term = DB::select('SELECT * FROM tb_terms');
+
+        foreach($term as $terms) {
+            $id_term = $terms->id;
+            $df = DB::table('tb_tf_idf')->where('id_term', '=', $id_term)->count();
+            $jmlFilm = DB::table('tb_film')->count();
+            $jmlFilm = $jmlFilm + 1;
+            $idf = log($jmlFilm / $df);
+
+            DB::table('tb_terms')->where('id', $id_term)->update(['df' => $df, 'idf' => $idf]);
         }
     }
 }
