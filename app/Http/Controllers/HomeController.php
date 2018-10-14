@@ -19,6 +19,8 @@ class HomeController extends Controller
         $getAll = new HomeController();
         print_r($getAll->toTermTf());
         print_r($getAll->toDfIdf());
+        print_r($getAll->toTfIdf());
+        print_r($getAll->toTfIdfKuadrat());
     }
 
     public function getUser() {
@@ -147,6 +149,38 @@ class HomeController extends Controller
             $idf = log($jmlFilm / $df);
 
             DB::table('tb_terms')->where('id', $id_term)->update(['df' => $df, 'idf' => $idf]);
+        }
+
+        $getAll = new HomeController();
+        print_r($getAll->toTfIdf());
+    }
+
+    public function toTfIdf() {
+        $tfIdf = DB::select('SELECT * FROM tb_tf_idf');
+
+        foreach($tfIdf as $tfIdfs) {
+            $id_terms = $tfIdfs->id_term;
+            $tf = $tfIdfs->tf;
+            $term = DB::table('tb_terms')->where('id', $id_terms)->get();
+            
+            foreach($term as $terms) {
+                $idf = $terms->idf;
+                $tfIdf = $tf * $idf;
+                DB::table('tb_tf_idf')->where('id_term', $id_terms)->where('tf', $tf)->update(['tf_idf' => $tfIdf]);
+            }
+        }
+    }
+
+    public function toTfIdfKuadrat() {
+        $tfIdf = DB::select('SELECT * FROM tb_tf_idf');
+
+        foreach($tfIdf as $tfIdfs) {
+            $tfIdf = $tfIdfs->tf_idf;
+            $id_term = $tfIdfs->id_term;
+            $tf = $tfIdfs->tf;
+            $tfIdfKuadrat = $tfIdf * $tfIdf;
+
+            DB::table('tb_tf_idf')->where('id_term', $id_term)->where('tf', $tf)->update(['tf_idf_kuadrat' => $tfIdfKuadrat]);
         }
     }
 }
