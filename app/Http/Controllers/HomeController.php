@@ -17,10 +17,38 @@ class HomeController extends Controller
         $stem = $stem->stem('loved');
 
         $getAll = new HomeController();
-        print_r($getAll->toTermTf());
-        print_r($getAll->toDfIdf());
-        print_r($getAll->toTfIdf());
-        print_r($getAll->toTfIdfKuadrat());
+        // print_r($getAll->toTermTf());
+        // print_r($getAll->toDfIdf());
+        // print_r($getAll->toTfIdf());
+        // print_r($getAll->toTfIdfKuadrat());
+        // $collection = collect([1, 2, 3, 4, 5]);
+        $collectionRow = collect([
+            [
+                'id' => 1,
+                'tf' => 2
+            ],
+            [
+                'id' => 2,
+                'tf' => 4
+            ],
+            [
+                'id' => 3,
+                'tf' => 6 
+            ]
+        ]);
+
+        // $collectionRow->keyBy('tf');
+        $map = $collectionRow->map(function($item) {
+            return [$item['id'] * $item['tf']];
+        });
+        print_r($map->all());
+
+
+        // $multiplied = $collection->map(function ($item, $key) {
+        //     return $item * 2;
+        // });
+
+        // $multiplied->all();   
     }
 
     public function getUser() {
