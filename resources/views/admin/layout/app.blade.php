@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Admin Helping - @yield('pageTitle')</title>
+    <title>Admin Rekomendasi Film - @yield('pageTitle')</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Bootstrap Wysihtml5 -->

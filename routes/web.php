@@ -24,11 +24,10 @@ Route::get('/', function () {
 // });
 
 Route::prefix('admin')->group(function() {
-    // Route::get('/dashboard', function() {
-    //     return view('admin.dashboard');
-    // });
-
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+    Route::get('/film', 'Admin\FilmController@index')->name('view.film');
+    Route::get('/film/create', 'Admin\FilmController@add')->name('add.film');
+    Route::post('/film/create', 'Admin\FilmController@create')->name('create.film');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

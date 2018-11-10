@@ -9,10 +9,7 @@
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-movie"></i><span class="hide-menu">Film</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Daftar Film</a></li>
-                        <li><a href="#">Tahun</a></li>
-                        <li><a href="#">Negara</a></li>
-                        <li><a href="#">Aktor/Aktris</a></li>
+                        <li><a href="{{ route('view.film') }}">Daftar Film</a></li>
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">User</span></a>
