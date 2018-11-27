@@ -10,14 +10,9 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Admin Rekomendasi Film - @yield('pageTitle')</title>
+    <title>Admin Rekomendasi Film - Login</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- Bootstrap Wysihtml5 -->
-    <link rel="stylesheet" href="{{ asset('admin/plugins/html5-editor/bootstrap-wysihtml5.css') }}" />
-    <!-- morris CSS -->
-    <link href="{{ asset('admin/plugins/morrisjs/morris.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -27,11 +22,10 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    @yield('add_css')
 <![endif]-->
 </head>
 
-<body class="fix-header fix-sidebar card-no-border">
+<body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -42,7 +36,9 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    @yield('content')
+    <section id="wrapper">
+        @yield('content')
+    </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -61,24 +57,13 @@
     <script src="{{ asset('admin/js/sidebarmenu.js') }}"></script>
     <!--stickey kit -->
     <script src="{{ asset('admin/plugins/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('admin/js/custom.min.js') }}"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugins -->
-    <!-- ============================================================== -->
-    <!--sparkline JavaScript -->
-    <script src="{{ asset('admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-    <!--morris JavaScript -->
-    <script src="{{ asset('admin/plugins/raphael/raphael-min.js') }}"></script>
-    <script src="{{ asset('admin/plugins/morrisjs/morris.min.js') }}"></script>
-    <!-- Chart JS -->
-    <script src="{{ asset('admin/js/dashboard1.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{ asset('admin/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script>
-    @yield('add_js')
 </body>
 
 </html>

@@ -1,1 +1,1 @@
-<footer class="footer"> © 2017 Admin Press Admin by themedesigner.in </footer>
+<footer class="footer"> © 2018 Admin Custom By Anang Novriadi </footer>

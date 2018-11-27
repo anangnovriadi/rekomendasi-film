@@ -34,31 +34,27 @@
                                 <table id="myTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Nama Film</th>
+                                            <th>Genre</th>
+                                            <th>Aktor/Aktris</th>
+                                            <th>Tahun</th>
+                                            <th>Produksi</th>
+                                            <th>Negara</th>
+                                            <th>Deskripsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($film as $films)
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>{{ $films->nama_film }}</td>
+                                            <td>{{ $films->genre }}</td>
+                                            <td>{{ $films->aktor_aktris }}</td>
+                                            <td>{{ $films->tahun }}</td>
+                                            <td>{{ $films->produksi }}</td>
+                                            <td>{{ $films->negara }}</td>
+                                            <td>{{ $films->deskripsi_film }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

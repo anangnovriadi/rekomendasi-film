@@ -15,7 +15,7 @@
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
                  <!-- dark Logo text -->
-                 <img src="{{ asset('admin/images/logo-text.png') }}" alt="homepage" class="dark-logo" />
+                 <img src="{{ asset('admin/images/admin.png') }}" alt="homepage" class="dark-logo" />
                  <!-- Light Logo text -->    
                  <img src="{{ asset('admin/images/logo-light-text.png') }}" class="light-logo" alt="homepage" /></span> </a>
         </div>
@@ -44,14 +44,15 @@
                             <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <form action="" method="POST">
-                                {{ csrf_field() }}
-                                <a>  
+                                <a href="{{ route('admin.logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
                                     <i class="fa fa-power-off"></i>
-                                    <button style="cursor: pointer; border: none; background: transparent; color: inherit; outline: none;" type="submit">
-                                        Logout
-                                    </button>   
+                                    Logout
                                 </a>
+
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
                                 </form>
                             </li>
                         </ul>

@@ -8,47 +8,113 @@ use Wamania\Snowball\English;
 use App\Model\User;
 use DB;
 use BigShark\SQLToBuilder\BuilderClass;
+use voku\helper\StopWords;
+use App\Http\Controllers\Admin\Stopword;
+use Nadar\Stemming\Stemm;
+
+// SELECT parent.id_film, sum(parent.tf_idf_kuadrat) FROM tb_tf_idf AS tb_tf_idf JOIN tb_tf_idf AS parent ON parent.id_term = tb_tf_idf.id_term WHERE tb_tf_idf.id_user = 1 AND parent.id_film >= 1 GROUP BY parent.id_film
 
 class HomeController extends Controller
 {
-    public function index() 
-    {
-        $stem = new English;
-        $stem = $stem->stem('loved');
+    // public function index() 
+    // {
+    //     $stem = new English;
+    //     $stem = $stem->stem('loved');
+    //     // $ii = $this->mapArray(2, 2);
+    //     $collection = collect([1, 2, 3, 4, 5]);
+    //     $coll = collect([2, 4, 3, 1, 6]);
 
-        $getAll = new HomeController();
-        // print_r($getAll->toTermTf());
-        // print_r($getAll->toDfIdf());
-        // print_r($getAll->toTfIdf());
-        // print_r($getAll->toTfIdfKuadrat());
-        // $collection = collect([1, 2, 3, 4, 5]);
-        $collectionRow = collect([
-            [
-                'id' => 1,
-                'tf' => 2
-            ],
-            [
-                'id' => 2,
-                'tf' => 4
-            ],
-            [
-                'id' => 3,
-                'tf' => 6 
-            ]
-        ]);
+    //     // $multiplied = $collection->map(function($item, $key) {
+    //     //     return $item * $item;
+    //     // });
 
-        // $collectionRow->keyBy('tf');
-        $map = $collectionRow->map(function($item) {
-            return [$item['id'] * $item['tf']];
+    //     $multiplied = $collection->combine($coll)->map(function($item, $key) {
+    //         return $item * $key;
+    //     });
+
+    //     $get = DB::select('SELECT tf from tb_tf_idf WHERE id_user >= ?', array(1));
+    //     // dd(collect($get));
+    //     // $multiplied = $this->mapArray($collection->map());
+    //     $getk = collect($get);
+
+    //     // $total = $getk->reduce(function ($carry, $item) {
+    //     //     return $carry;
+    //     // });
+    //     $mul = $getk->pluck('tf')->map(function($item, $key) {
+    //         return $item * 2;
+    //     });
+
+    //     dd($mul);
+    //     // print_r($multiplied->all());
+    // }
+
+    public function index() {
+        $qTerm = DB::select('SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tb_tf_idf AS tb_tf_idf JOIN tb_tf_idf AS parent ON parent.id_term = tb_tf_idf.id_term WHERE tb_tf_idf.id_user = 1 AND parent.id_film >= 1 GROUP BY parent.id_film');
+        // foreach($qTerm as $qTerms) {
+        //     print_r($qTerms->tfidf);
+        //     DB::insert("INSERT INTO tb_cosine(id, id_film, tf_idf_sum) values (null, '$qTerms->id_film', '$qTerms->tfidf')");
+        // }
+            
+        $d = DB::select('SELECT SUM(tf_idf) FROM tb_tf_idf GROUP BY id_film > 1');
+        $d = collect($d);
+        $d = $d->pluck('SUM(tf_idf)');
+
+        $qTerm = collect($qTerm);
+        $qTerm = $qTerm->pluck('tfidf');
+
+        $q = DB::select('SELECT tf_idf from tb_tf_idf WHERE id_user >= ?', array(1));
+        $q = collect($q);
+        $q = $q->pluck('tf_idf');
+        
+        $com = $qTerm->combine($d);
+        $com->all();
+
+        $cos = $com->map(function ($item, $key) {
+            $q = DB::select('SELECT tf_idf from tb_tf_idf WHERE id_user >= ?', array(1));
+            $q = collect($q);
+            $q = $q->pluck('tf_idf');
+
+            $q = $q->pipe(function ($q) {
+                return $q->sum();
+            });
+
+            return $item / ($q * $key);
+
+            // DB::select("SELECT tf_cosine from tb_tf_idf WHERE id_user = '$df'");
         });
-        print_r($map->all());
 
+        $keyCos = $cos->keys();
+        // dd($keyCos);
 
-        // $multiplied = $collection->map(function ($item, $key) {
-        //     return $item * 2;
-        // });
+        foreach($keyCos as $coss) {
+            $cc = DB::select("SELECT id_film FROM tb_cosine WHERE tf_idf_sum = '$coss'");
+            print_r($cc);
 
-        // $multiplied->all();   
+            foreach($cc as $ccs) {
+                $ccf = DB::select("SELECT * FROM tb_film WHERE id = '$ccs->id_film'");
+                print_r($ccf);
+            }
+        }
+        // dd($cos);
+
+        // DB::select('SELECT tf_idf from tb_tf_idf WHERE id_user >= ?', array(1));
+    }
+
+    public function ff() {
+        $get = DB::select('SELECT * FROM tb_tf_idf WHERE id_user = 1');
+        foreach($get as $gets) {
+            $user = $gets->id_term;
+            return $user;
+            print_r($user);
+        }
+    }
+
+    public function uu() {
+        
+    }
+
+    public function mapArray($item, $key) {
+        return $item * 2;
     }
 
     public function getUser() {

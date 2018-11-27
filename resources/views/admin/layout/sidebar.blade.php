@@ -4,7 +4,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li class="nav-devider"></li>
+                <li class="nav-devider m-0 mt-0 mb-3"></li>
                 <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Dashboard</span></a>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-movie"></i><span class="hide-menu">Film</span></a>

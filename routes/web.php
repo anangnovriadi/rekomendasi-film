@@ -15,19 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/form-login', function () {
-//     return view('front.auth.form-login');
-// });
+/** Front
+ * Rekomendasi Film
+ */
+// Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('/dashboard', function () {
-//     return view('front.dashboard.home');
-// });
 
+/** Admin
+ * Rekomendasi Film
+ */
 Route::prefix('admin')->group(function() {
+    Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
-    Route::get('/film', 'Admin\FilmController@index')->name('view.film');
+    Route::get('/film', 'Admin\FilmController@view')->name('view.film');
     Route::get('/film/create', 'Admin\FilmController@add')->name('add.film');
     Route::post('/film/create', 'Admin\FilmController@create')->name('create.film');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
