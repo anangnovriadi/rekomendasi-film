@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Film;
-use App\Http\Controllers\Admin\Stopword;
 use Nadar\Stemming\Stemm;
 use voku\helper\StopWords;
 
@@ -106,7 +105,6 @@ class FilmController extends Controller
         $deskripsi_film = str_replace($stopword, '', $deskripsi_film);
         $deskripsi_film = Stemm::stemPhrase($deskripsi_film, 'en');
         $deskripsi_film = trim(preg_replace('/\s+/', ' ', $deskripsi_film));
-
         
         Film::create([
             'nama_film' => $nama_film,

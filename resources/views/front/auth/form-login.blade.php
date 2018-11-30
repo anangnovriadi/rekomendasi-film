@@ -21,7 +21,7 @@
                         <form>
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="email" class="form-control" placeholder="Enter Username">
+                                <input type="email" class="form-control" placeholder="Enter Email">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>

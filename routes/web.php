@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 /** Front
  * Rekomendasi Film
@@ -33,3 +33,8 @@ Route::prefix('admin')->group(function() {
     Route::get('/film/create', 'Admin\FilmController@add')->name('add.film');
     Route::post('/film/create', 'Admin\FilmController@create')->name('create.film');
 });
+
+Route::get('/', 'HomesController@view')->name('home');
+Route::get('/login', 'Auth\UserLoginController@showLoginForm')->name('login');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/register', 'Auth\RegisterController@register')->name('register');

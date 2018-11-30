@@ -12,48 +12,10 @@ use voku\helper\StopWords;
 use App\Http\Controllers\Admin\Stopword;
 use Nadar\Stemming\Stemm;
 
-// SELECT parent.id_film, sum(parent.tf_idf_kuadrat) FROM tb_tf_idf AS tb_tf_idf JOIN tb_tf_idf AS parent ON parent.id_term = tb_tf_idf.id_term WHERE tb_tf_idf.id_user = 1 AND parent.id_film >= 1 GROUP BY parent.id_film
-
 class HomeController extends Controller
 {
-    // public function index() 
-    // {
-    //     $stem = new English;
-    //     $stem = $stem->stem('loved');
-    //     // $ii = $this->mapArray(2, 2);
-    //     $collection = collect([1, 2, 3, 4, 5]);
-    //     $coll = collect([2, 4, 3, 1, 6]);
-
-    //     // $multiplied = $collection->map(function($item, $key) {
-    //     //     return $item * $item;
-    //     // });
-
-    //     $multiplied = $collection->combine($coll)->map(function($item, $key) {
-    //         return $item * $key;
-    //     });
-
-    //     $get = DB::select('SELECT tf from tb_tf_idf WHERE id_user >= ?', array(1));
-    //     // dd(collect($get));
-    //     // $multiplied = $this->mapArray($collection->map());
-    //     $getk = collect($get);
-
-    //     // $total = $getk->reduce(function ($carry, $item) {
-    //     //     return $carry;
-    //     // });
-    //     $mul = $getk->pluck('tf')->map(function($item, $key) {
-    //         return $item * 2;
-    //     });
-
-    //     dd($mul);
-    //     // print_r($multiplied->all());
-    // }
-
     public function index() {
         $qTerm = DB::select('SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tb_tf_idf AS tb_tf_idf JOIN tb_tf_idf AS parent ON parent.id_term = tb_tf_idf.id_term WHERE tb_tf_idf.id_user = 1 AND parent.id_film >= 1 GROUP BY parent.id_film');
-        // foreach($qTerm as $qTerms) {
-        //     print_r($qTerms->tfidf);
-        //     DB::insert("INSERT INTO tb_cosine(id, id_film, tf_idf_sum) values (null, '$qTerms->id_film', '$qTerms->tfidf')");
-        // }
             
         $d = DB::select('SELECT SUM(tf_idf) FROM tb_tf_idf GROUP BY id_film > 1');
         $d = collect($d);
@@ -79,12 +41,9 @@ class HomeController extends Controller
             });
 
             return $item / ($q * $key);
-
-            // DB::select("SELECT tf_cosine from tb_tf_idf WHERE id_user = '$df'");
         });
 
         $keyCos = $cos->keys();
-        // dd($keyCos);
 
         foreach($keyCos as $coss) {
             $cc = DB::select("SELECT id_film FROM tb_cosine WHERE tf_idf_sum = '$coss'");
@@ -95,9 +54,6 @@ class HomeController extends Controller
                 print_r($ccf);
             }
         }
-        // dd($cos);
-
-        // DB::select('SELECT tf_idf from tb_tf_idf WHERE id_user >= ?', array(1));
     }
 
     public function ff() {
