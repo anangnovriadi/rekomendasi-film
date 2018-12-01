@@ -18,14 +18,15 @@
                 </div>
                 <div class="content">
                     <div class="wrap-content">
-                        <form>
+                        <form method="POST" action="{{ route('login') }}">
+                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="email" class="form-control" placeholder="Enter Email">
+                                <input type="email" name="email" class="form-control" placeholder="Enter Username">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Enter Password">
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

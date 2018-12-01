@@ -30,3 +30,9 @@ body {
     background: #3f1052;
     border-radius: 3px 3px 0 0;
 }
+
+.btn-tr {
+    background: transparent;
+    border: navajowhite;
+    cursor: pointer;
+}

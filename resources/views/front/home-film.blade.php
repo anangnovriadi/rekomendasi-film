@@ -23,9 +23,9 @@
                     </li>
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
-                            <button class="nav-link" type="submit">Logout</button>
+                            {{ csrf_field() }}
+                            <button class="nav-link btn-tr" type="submit">Logout</button>
                         </form>
-                        {{-- <a class="nav-link" href="#">Logout</a> --}}
                     </li>
                 </ul>
             </div>
