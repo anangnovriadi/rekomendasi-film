@@ -1,7 +1,7 @@
 @extends('admin.auth.layout.app')
 
 @section('content')
-<div class="login-register" style="background-image:url(/admin/images/big/img2.jpg);">
+<div class="login-register" style="opacity: 1; background-image: url(https://lh4.googleusercontent.com/proxy/cuUbbMP9rKYZklh_uD7k1IyNKv-xyABaITwFWYSElNO7PR-Sce8MqryijVuo9o-QTKOypVHu1kGN6jN2UgVYd_g0AlwGBuytF-Kplw=w3840-h2160-p-k-no-nd-mv)">
     <div class="login-box card">
         <div class="card-body">
             <form method="post" action="{{ route('admin.login') }}" class="form-horizontal form-material">

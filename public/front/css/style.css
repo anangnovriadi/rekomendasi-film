@@ -6,9 +6,25 @@ body {
     box-shadow: 0 0 30px rgba(7, 51, 84, 0.17);
 }
 
+.gray {
+    color: #67757c;
+}
+
+.gray-g {
+    color: #455a64;
+}
+
+.container-cus {
+    padding-bottom: 60px;
+    padding-top: 95px;
+    padding-left: 4%;
+    padding-right: 4%
+}
+
 .nav-cus {
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+    padding-left: 4%;
+    padding-right: 4%;
+    background: white;
 }
 
 .content-inner {
@@ -35,4 +51,23 @@ body {
     background: transparent;
     border: navajowhite;
     cursor: pointer;
+    color: rgba(0,0,0,.9) !important; 
+}
+
+/* Card */
+.card-top-cus {
+    max-height: 180px;
+}
+
+/* Footer */
+.footer {
+    bottom: 0;
+    color: #67757c;
+    left: 0px;
+    text-align: center;
+    padding: 17px 15px;
+    right: 0;
+    border-top: 1px solid rgba(120, 130, 140, 0.13);
+    background: #ffffff;
+    display: block;
 }

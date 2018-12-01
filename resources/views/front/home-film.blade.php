@@ -1,35 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
-    <title>Rekomendasi Film - Home</title>
-</head>
-<body>
-    <div>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light shadow nav-cus">
-            <a class="navbar-brand" href="#">Rekomendasi Film</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}">
-                            {{ csrf_field() }}
-                            <button class="nav-link btn-tr" type="submit">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+@extends('front.layout.app')
+
+@section('title', 'Home')
+
+@section('content')
+
+<div class="container-cus">
+    <div class="pb-4">
+        <h4 class="gray-g">Welcome to Rekomendasi Film</h4>
     </div>
-</body>
-</html>
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img class="card-img-top card-top-cus" src="https://via.placeholder.com/150" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img class="card-img-top card-top-cus" src="https://via.placeholder.com/150" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img class="card-img-top card-top-cus" src="https://via.placeholder.com/150" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img class="card-img-top card-top-cus" src="https://via.placeholder.com/150" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
