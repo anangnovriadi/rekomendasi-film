@@ -49,6 +49,11 @@
                                 <input type="password" name="password" class="form-control" placeholder="Enter Password">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="pt-4">
+                                <span>
+                                    <p class="gray">Sudah punya akun, login <a href="/login">disini</a></p>
+                                </span>
+                            </div>
                         </form>
                     </div>
                 </div>

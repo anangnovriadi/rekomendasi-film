@@ -14,6 +14,14 @@ body {
     color: #455a64;
 }
 
+.gray-d {
+    color: #8f9aa5 !important;
+}
+
+.gray-d:hover {
+    color: white !important;
+}
+
 .container-cus {
     padding-bottom: 60px;
     padding-top: 95px;
@@ -24,7 +32,7 @@ body {
 .nav-cus {
     padding-left: 4%;
     padding-right: 4%;
-    background: white;
+    background: #2f3d4a;
 }
 
 .content-inner {
@@ -51,12 +59,17 @@ body {
     background: transparent;
     border: navajowhite;
     cursor: pointer;
-    color: rgba(0,0,0,.9) !important; 
+    color: #8f9aa5 !important; 
 }
 
 /* Card */
 .card-top-cus {
     max-height: 180px;
+}
+
+.card-s {
+    -webkit-box-shadow: 0px 5px 50px rgba(26, 137, 159, 0.3);
+    box-shadow: 0px 5px 50px rgba(26, 137, 159, 0.3);
 }
 
 /* Footer */
