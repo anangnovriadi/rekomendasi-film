@@ -65,10 +65,6 @@ class HomeController extends Controller
         }
     }
 
-    public function uu() {
-        
-    }
-
     public function mapArray($item, $key) {
         return $item * 2;
     }

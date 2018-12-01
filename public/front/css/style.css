@@ -68,8 +68,8 @@ body {
 }
 
 .card-s {
-    -webkit-box-shadow: 0px 5px 50px rgba(26, 137, 159, 0.3);
-    box-shadow: 0px 5px 50px rgba(26, 137, 159, 0.3);
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* Footer */
