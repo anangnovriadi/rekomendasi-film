@@ -34,7 +34,8 @@ Route::prefix('admin')->group(function() {
     Route::post('/film/create', 'Admin\FilmController@create')->name('create.film');
 });
 
-Route::get('/', 'HomesController@view')->name('home');
+Route::get('/home', 'HomesController@view')->name('home');
 Route::get('/login', 'Auth\UserLoginController@showLoginForm')->name('login');
+Route::post('/logout', 'Auth\LogoutController@logout')->name('logout');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register')->name('register');

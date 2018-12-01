@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
-    <title>Rekomendasi Film - Form Login</title>
+    <title>Rekomendasi Film - Home</title>
 </head>
 <body>
     <div>
@@ -22,7 +22,10 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            <button class="nav-link" type="submit">Logout</button>
+                        </form>
+                        {{-- <a class="nav-link" href="#">Logout</a> --}}
                     </li>
                 </ul>
             </div>
