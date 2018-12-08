@@ -22,11 +22,11 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="email" name="email" class="form-control" placeholder="Enter Username">
+                                <input type="email" name="email" class="form-control" placeholder="Enter Username" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
                             <button type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Order" class="btn btn-primary">Submit</button>
                             <div class="pt-4">

@@ -22,31 +22,31 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label>Firstname</label>
-                                <input type="text" name="firstname" class="form-control" placeholder="Enter Firstname">
+                                <input type="text" name="firstname" class="form-control" placeholder="Enter Firstname" required>
                             </div>
                             <div class="form-group">
                                 <label>Lastname</label>
-                                <input type="text" name="lastname" class="form-control" placeholder="Enter Lastname">
+                                <input type="text" name="lastname" class="form-control" placeholder="Enter Lastname" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                                <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
                                 <label>Nama Film Yang Disukai</label>
-                                <input type="text" name="nama_film_liked" class="form-control" placeholder="Enter Nama Film Yang Disukai">
+                                <input type="text" name="nama_film_liked" class="form-control" placeholder="Enter Nama Film Yang Disukai" required>
                             </div>
                             <div class="form-group">
                                 <label>Genre Yang Disukai</label>
-                                <input type="text" name="genre_film_liked" class="form-control" placeholder="Enter Genre Yang Disukai">
+                                <input type="text" name="genre_film_liked" class="form-control" placeholder="Enter Genre Yang Disukai" required>
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi Film</label>
-                                <input type="text" name="deskripsi_film_liked" class="form-control" placeholder="Enter Deskripsi Film">
+                                <input type="text" name="deskripsi_film_liked" class="form-control" placeholder="Enter Deskripsi Film" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <div class="pt-4">
