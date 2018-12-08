@@ -28,7 +28,7 @@
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Enter Password">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Order" class="btn btn-primary">Submit</button>
                             <div class="pt-4">
                                 <span>
                                     <p class="gray">Belum punya akun, register <a href="/register">disini</a></p>
@@ -40,5 +40,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $('.btn').on('click', function() {
+            var $this = $(this);
+            $this.button('loading');
+        });
+    </script>
 </body>
 </html>

@@ -14,7 +14,7 @@
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">User</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Daftar User</a></li>
+                        <li><a href="{{ route('view.user') }}">Daftar User</a></li>
                     </ul>
                 </li>
                 <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>

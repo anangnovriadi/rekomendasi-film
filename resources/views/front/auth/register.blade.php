@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi Film</label>
-                                <input type="text" name="deskripisi_film_liked" class="form-control" placeholder="Enter Deskripsi Film">
+                                <input type="text" name="deskripsi_film_liked" class="form-control" placeholder="Enter Deskripsi Film">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>

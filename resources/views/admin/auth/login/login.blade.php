@@ -1,9 +1,9 @@
 @extends('admin.auth.layout.app')
 
 @section('content')
-<div class="login-register" style="opacity: 1; background-image: url(https://lh4.googleusercontent.com/proxy/cuUbbMP9rKYZklh_uD7k1IyNKv-xyABaITwFWYSElNO7PR-Sce8MqryijVuo9o-QTKOypVHu1kGN6jN2UgVYd_g0AlwGBuytF-Kplw=w3840-h2160-p-k-no-nd-mv)">
+<div class="login-register" style="opacity: 1; background-color: #e8eff3;">
     <div class="login-box card">
-        <div class="card-body">
+        <div class="card-body" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);">
             <form method="post" action="{{ route('admin.login') }}" class="form-horizontal form-material">
                 {{ csrf_field() }}
                 <h3 class="box-title m-b-20">Sign In Admin Rekomendasi Film</h3>
