@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Rekomendasi Film - Form Login</title>
 </head>
 <body>
@@ -48,7 +49,7 @@
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Loading" class="btn btn-primary">Submit</button>                            
                             <div class="pt-4">
                                 <span>
                                     <p class="gray">Sudah punya akun, login <a href="/login">disini</a></p>
@@ -60,5 +61,13 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $('.btn').on('click', function() {
+            var $this = $(this);
+            $this.button('loading');
+        });
+    </script>
 </body>
 </html>

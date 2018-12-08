@@ -10,6 +10,7 @@
     <title>Rekomendasi Film - @yield('title')</title>
 </head>
 <body>
+    <div class="se-pre-con"></div>
     <div>
         @include('front.layout.header')
         <div>
@@ -17,5 +18,12 @@
         </div>
         @include('front.layout.footer')
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script>
+        $(window).load(function() {
+            $(".se-pre-con").fadeOut('slow');
+        });
+    </script>
 </body>
 </html>
