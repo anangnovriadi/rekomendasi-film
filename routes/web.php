@@ -18,10 +18,13 @@ Route::prefix('admin')->group(function() {
     Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
+
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
     Route::get('/film', 'Admin\FilmController@view')->name('view.film');
     Route::get('/film/create', 'Admin\FilmController@add')->name('add.film');
     Route::post('/film/create', 'Admin\FilmController@create')->name('create.film');
+
+    Route::get('/user', 'Admin\UserController@index')->name('view.user');
 });
 
 /** Front
