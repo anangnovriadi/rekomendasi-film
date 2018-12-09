@@ -13,7 +13,7 @@
 <body>
     <div>
         <div class="content-inner shadow m-auto">
-            <div class="mt-5">
+            <div class="mt-5 mb-5">
                 <div class="head-content text-center">
                     <h4 class="white">Register@Rekomendasi Film</h4>    
                 </div>
