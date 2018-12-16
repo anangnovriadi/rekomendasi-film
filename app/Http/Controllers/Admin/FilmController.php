@@ -24,7 +24,7 @@ class FilmController extends Controller
             'negara' => 'required',
             'deskripsi_film' => 'required'
         ]);
-
+        
         $stopword = new StopWords();
         $stopword = $stopword->getStopWordsFromLanguage('en');
         

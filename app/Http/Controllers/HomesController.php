@@ -15,9 +15,92 @@ class HomesController extends Controller
 
     public function view() {
         // $id = Auth::user();
-        $this->getUser();
-        dd($this->cosine());
-        return view('front.home-film');
+        // $this->getUser();
+        // $this->cosine();
+        
+        // All
+        $id_user = $this->getUser();
+
+        $this->toTfIdfKuadrat();
+        $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
+
+        foreach($qTerm as $qTerms) {
+            DB::insert("INSERT INTO cosines(id, id_film, tf_idf_sum) values (null, '$qTerms->id_film', '$qTerms->tfidf')");
+        }
+        
+        $d = DB::select('SELECT SUM(tf_idf) FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
+        $d = collect($d);
+        $d = $d->pluck('SUM(tf_idf)');
+
+        $qTerm = collect($qTerm);
+
+        $q = DB::select('SELECT tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));
+        $q = collect($q);
+        $q = $q->pluck('tf_idf');
+        
+        $com = $d->combine($qTerm);
+
+        $cos = $com->map(function ($item, $key) {
+            $id_user = $this->getUser();
+
+            $q = DB::select('SELECT tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));
+            $q = collect($q);
+            $q = $q->pluck('tf_idf');
+
+            $q = $q->pipe(function ($q) {
+                return $q->sum();
+            });
+
+            $i = collect($item);
+
+            // $i = $i['tfidf'];    
+            DB::insert("INSERT INTO coss(id, id_film, tf_idf_sum_doc) values (null, '$i[id_film]', '$key')");
+            return $key / ($q * $i['tfidf']);
+        });
+
+        $keyCos = $cos->keys();
+        // dd($keyCos);
+        // $keyCos = $cos->unique();
+        // $keyCos = $keyCos->values()->all();
+
+        foreach($keyCos as $coss) {
+            $cc = DB::select("SELECT id_film FROM coss WHERE tf_idf_sum_doc = '$coss'");
+            // print_r($coss);
+            foreach($cc as $ccs) {
+                $all = DB::select("SELECT * FROM films WHERE id = '$ccs->id_film'");
+                // return view('front.home-film')->with('all', $all);
+                // dd($all);
+
+            }
+        }
+
+        $toFront = $keyCos->map(function($item, $key) {
+            $cc = DB::select("SELECT id_film FROM coss WHERE tf_idf_sum_doc = '$item'");
+            return $cc;
+        });
+
+        $toFrontW = $toFront->map(function($item, $key) {
+            // $as = $item[0];
+            // $all = DB::select("SELECT * FROM films WHERE id = '$as'");
+
+            return $item[0];
+        });
+
+
+        $to = $toFrontW->pluck('id_film');
+
+        $toFrontZ = $to->map(function($item, $key) {
+            // $as = $item[0];
+            $all = DB::select("SELECT * FROM films WHERE id = '$item'");
+            return $all;
+        });
+
+        // dd($toFrontZ->sort());
+
+        $sort = $toFrontZ->sort();
+        $take = $toFrontZ->take(5);
+
+        return view('front.home-film', compact('take'));
     }
 
     public function getUser() {
@@ -41,9 +124,10 @@ class HomesController extends Controller
 
         foreach($user as $users) {
             $nama_film = $tokenizer->tokenize($users->nama_film_liked);
-            $genre_film = $tokenizer->tokenize($users->genre_film_liked);
+            // $genre_film = $tokenizer->tokenize($users->genre_film_liked);
+            $deskripsi_film = $tokenizer->tokenize($users->deskripsi_film_liked);
             
-            $mergeAll = array_merge($nama_film, $genre_film);
+            $mergeAll = array_merge($nama_film, $deskripsi_film);
         }
 
         return $mergeAll;
@@ -199,18 +283,15 @@ class HomesController extends Controller
         });
 
         $keyCos = $cos->keys();
-        // dd($keyCos);
 
         foreach($keyCos as $coss) {
             $cc = DB::select("SELECT id_film FROM cosines WHERE tf_idf_sum = '$coss'");
-            // print_r($cc);
 
             foreach($cc as $ccs) {
-                $ccf = DB::select("SELECT nama_film FROM films WHERE id = '$ccs->id_film'");
-                
+                $all = DB::select("SELECT * FROM films WHERE id = '$ccs->id_film'");
             }
 
-            print_r($ccf);
+            return view('front.home-film')->with('all', $all);
         }
     }
 }
