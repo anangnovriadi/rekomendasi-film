@@ -55,8 +55,7 @@ class RegisterController extends Controller
             'email' => 'required',
             'password' => 'required',
             'nama_film_liked' => 'required',
-            'genre_film_liked' => 'required',
-            'deskripsi_film_liked' => 'required'
+            'genre_film_liked' => 'required'
         ]);
     }
 
@@ -94,18 +93,18 @@ class RegisterController extends Controller
         $genre_film_liked = trim(preg_replace('/\s+/', ' ', $genre_film_liked));
 
         // Deskripsi Film Liked
-        $deskripsi_film_liked = $data['deskripsi_film_liked'];
-        $deskripsi_film_liked = strtolower($deskripsi_film_liked);
-        $deskripsi_film_liked = trim(preg_replace('/([^a-z0-9]+)/i', ' ', $deskripsi_film_liked), '');
+        // $deskripsi_film_liked = $data['deskripsi_film_liked'];
+        // $deskripsi_film_liked = strtolower($deskripsi_film_liked);
+        // $deskripsi_film_liked = trim(preg_replace('/([^a-z0-9]+)/i', ' ', $deskripsi_film_liked), '');
 
-        foreach($stopword as &$stopwords) {
-            $stopwords = '/\b' . preg_quote($stopwords, '/') . '\b/';
-        }
+        // foreach($stopword as &$stopwords) {
+        //     $stopwords = '/\b' . preg_quote($stopwords, '/') . '\b/';
+        // }
         
-        $deskripsi_film_liked = preg_replace($stopword, '', $deskripsi_film_liked);
-        $deskripsi_film_liked = str_replace($stopword, '', $deskripsi_film_liked);
-        $deskripsi_film_liked = Stemm::stemPhrase($deskripsi_film_liked, 'en');
-        $deskripsi_film_liked = trim(preg_replace('/\s+/', ' ', $deskripsi_film_liked));
+        // $deskripsi_film_liked = preg_replace($stopword, '', $deskripsi_film_liked);
+        // $deskripsi_film_liked = str_replace($stopword, '', $deskripsi_film_liked);
+        // $deskripsi_film_liked = Stemm::stemPhrase($deskripsi_film_liked, 'en');
+        // $deskripsi_film_liked = trim(preg_replace('/\s+/', ' ', $deskripsi_film_liked));
 
         return User::create([
             'firstname' => $data['firstname'],
@@ -113,8 +112,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'nama_film_liked' => $nama_film_liked,
-            'genre_film_liked' => $genre_film_liked,
-            'deskripsi_film_liked' => $deskripsi_film_liked
+            'genre_film_liked' => $genre_film_liked
         ]);
     }
 }

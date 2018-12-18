@@ -10,7 +10,7 @@
                 <a class="nav-link gray-d" href="/home">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link gray-d" href="#">Semua Film</a>
+                <a class="nav-link gray-d" href="{{ route('all-film') }}">Semua Film</a>
             </li>
             <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}">

@@ -35,4 +35,9 @@ Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/logout', 'Auth\LogoutController@logout')->name('logout');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
+Route::post('/register/autocomplete', 'Auth\RegisterController@fetch')->name('register.autocomplete');
 Route::get('/home', 'HomesController@view')->name('home');
+Route::get('/all-film', 'AllFilmController@index')->name('all-film');
+
+Route::get('/autocomplete', 'AutoComplete@index');
+Route::post('/autocomplete/fetch', 'AutoComplete@fetch')->name('autocomplete.fetch');
