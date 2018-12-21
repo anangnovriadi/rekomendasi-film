@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Cosine;
 use App\Model\Term;
 use App\Model\Tf_idf;
+use App\Model\Cos;
 
 class LogoutController extends Controller 
 {
@@ -17,6 +18,7 @@ class LogoutController extends Controller
         Tf_idf::query()->truncate();
         Term::query()->truncate();
         Cosine::query()->truncate();
+        Cos::query()->truncate();
 
         return redirect()->route('login');
     }
