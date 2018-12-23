@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-7 align-self-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
                     <li class="breadcrumb-item active">Data User</li>
                 </ol>
             </div>
@@ -37,7 +37,6 @@
                                             <th>Register</th>
                                             <th>Nama Film(Liked)</th>
                                             <th>Genre Film(Liked)</th>
-                                            <th>Deskripsi Film(Liked)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,7 +50,6 @@
                                             <td style="width: 14%;"><span class="text-muted"><i class="fa fa-clock-o"></i> {{ $item->created_at->diffForHumans() }}</span> </td>
                                             <td>{{ $item->nama_film_liked }}</td>
                                             <td>{{ $item->genre_film_liked }}</td>
-                                            <td>{{ $item->deskripsi_film_liked }}</td>
                                         </tr>
                                         @php $no++ @endphp
                                         @endforeach

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
 use Sastrawi\Tokenizer\TokenizerFactory;
+use DB;
 
 class HomesController extends Controller
 {
@@ -16,13 +16,10 @@ class HomesController extends Controller
 
     public function view()
     {
-        // $id_user = $this->getUser();
-
         $countTable = DB::table('terms')->count();
+
         if ($countTable > 1) {
             $id_user = $this->getUser();
-
-            $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
 
             $d = DB::select('SELECT SUM(tf_idf) FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
             $d = collect($d);

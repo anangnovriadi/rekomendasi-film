@@ -20,36 +20,10 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="card-group">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 class="m-b-0"><i class="mdi mdi-movie text-info"></i></h2>
-                                <h3 class="">100</h3>
-                                <h6 class="card-subtitle">All Film</h6></div>
-                            <div class="col-12">
-                                <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 85%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 class="m-b-0"><i class="mdi mdi-account-multiple text-success"></i></h2>
-                                <h3 class="">20</h3>
-                                <h6 class="card-subtitle">All User</h6></div>
-                            <div class="col-12">
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 40%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row page-titles" style="background: #1976d2 no-repeat center top">
+                <div class="col-lg-12 text-center">
+                    <h1 class="m-t-30" style="color: white;">Rekomendasi Film</h1>
+                    <h5 class="m-b-30" style="color: rgba(255, 255, 255, 0.65);"><i class="ti-pin"></i> Welcome to Admin Rekomendasi Film</h5>
                 </div>
             </div>
         </div>

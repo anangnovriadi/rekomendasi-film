@@ -9,12 +9,12 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 /** Admin
  * Rekomendasi Film
  */
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->group(function () {
     Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
@@ -23,6 +23,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/film', 'Admin\FilmController@view')->name('view.film');
     Route::get('/film/create', 'Admin\FilmController@add')->name('add.film');
     Route::post('/film/create', 'Admin\FilmController@create')->name('create.film');
+
+    Route::get('/genre', 'Admin\GenreController@view')->name('view.genre');
+    Route::get('/genre/create', 'Admin\GenreController@add')->name('add.genre');
+    Route::post('/genre/create', 'Admin\GenreController@create')->name('create.genre');
 
     Route::get('/user', 'Admin\UserController@index')->name('view.user');
 });
