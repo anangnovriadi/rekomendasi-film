@@ -10,7 +10,8 @@ class GenreController extends Controller
 {
     public function view()
     {
-        return view('admin.genre.view');
+        $genre = Genre::all();
+        return view('admin.genre.view', compact('genre'));
     }
 
     public function add()

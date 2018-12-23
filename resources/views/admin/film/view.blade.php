@@ -34,6 +34,7 @@
                                 <table id="myTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Nama Film</th>
                                             <th>Genre</th>
                                             <th>Aktor/Aktris</th>
@@ -44,8 +45,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php $no = 1; @endphp
                                         @foreach ($film as $films)
                                         <tr>
+                                            <td><a>{{ $no }}</a></td>
                                             <td>{{ $films->nama_film }}</td>
                                             <td>{{ $films->genre }}</td>
                                             <td>{{ $films->aktor_aktris }}</td>
@@ -54,6 +57,7 @@
                                             <td>{{ $films->negara }}</td>
                                             <td>{{ $films->deskripsi_film }}</td>
                                         </tr>
+                                        @php $no++ @endphp
                                         @endforeach
                                     </tbody>
                                 </table>

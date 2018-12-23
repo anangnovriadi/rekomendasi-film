@@ -32,45 +32,21 @@
                             </div>
                             <div class="pt-4">
                                 <div class="row el-element-overlay">
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="card">
-                                            <div class="el-card-item">
-                                                <div class="el-card-avatar el-overlay-1"> 
-                                                    <img src={{ asset('admin/images/users/1.jpg') }} alt="user">
-                                                </div>
-                                                <div class="el-card-content">
-                                                    <h3 class="box-title">Horror</h3> <small>Horror Movie</small>
-                                                    <br> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="card">
-                                            <div class="el-card-item">
-                                                <div class="el-card-avatar el-overlay-1"> 
-                                                    <img src={{ asset('admin/images/users/1.jpg') }} alt="user">
-                                                </div>
-                                                <div class="el-card-content">
-                                                    <h3 class="box-title">Adventure</h3> <small>Adventure Movie</small>
-                                                    <br> 
+                                    @foreach ($genre as $row)
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card">
+                                                <div class="el-card-item">
+                                                    <div class="el-card-avatar el-overlay-1"> 
+                                                        <img src={{ asset('admin/images/users/1.jpg') }} alt="user">
+                                                    </div>
+                                                    <div class="el-card-content">
+                                                        <h3 class="box-title">{{ $row->nama_genre }}</h3> <small>{{ $row->nama_genre }} Movie</small>
+                                                        <br> 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="card">
-                                            <div class="el-card-item">
-                                                <div class="el-card-avatar el-overlay-1"> 
-                                                    <img src={{ asset('admin/images/users/1.jpg') }} alt="user">
-                                                </div>
-                                                <div class="el-card-content">
-                                                    <h3 class="box-title">Action</h3> <small>Action Movie</small>
-                                                    <br> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
