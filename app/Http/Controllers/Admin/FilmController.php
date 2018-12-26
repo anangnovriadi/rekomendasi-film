@@ -24,7 +24,8 @@ class FilmController extends Controller
             'tahun' => 'required',
             'produksi' => 'required',
             'negara' => 'required',
-            'deskripsi_film' => 'required'
+            'deskripsi_film' => 'required',
+            'image_film' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $stopword = new StopWords();
@@ -108,6 +109,14 @@ class FilmController extends Controller
         $deskripsi_film = Stemm::stemPhrase($deskripsi_film, 'en');
         $deskripsi_film = trim(preg_replace('/\s+/', ' ', $deskripsi_film));
 
+        if ($request->hasFile('image_film')) {
+            $image = $request->file('image_film');
+            $name = str_slug($image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('\admin\images');
+            $imagePath = $destinationPath. "/". $name;
+            $image->move($destinationPath, $name);
+        }
+
         Film::create([
             'nama_film' => $nama_film,
             'genre' => $genre,
@@ -115,7 +124,8 @@ class FilmController extends Controller
             'tahun' => $tahun,
             'produksi' => $produksi,
             'negara' => $negara,
-            'deskripsi_film' => $deskripsi_film
+            'deskripsi_film' => $deskripsi_film,
+            'image_film' => 'images/'.$name
         ]);
 
         return redirect()->route('create.film');

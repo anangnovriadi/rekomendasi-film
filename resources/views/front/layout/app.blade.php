@@ -13,7 +13,7 @@
 <body>
     <div class="se-pre-con"></div>
     <div>
-        @include('front.layout.header')
+        @include('front.layout.header2')
         <div>
             @yield('content')
         </div>

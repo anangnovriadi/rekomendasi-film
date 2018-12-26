@@ -12,7 +12,7 @@
         @foreach ($take as $value => $key)
         <div class="col-md-3 mb-4">
             <div class="card card-s">
-                <img class="card-img-top card-top-cus" src="{{ asset('admin/images/big/img6.jpg') }}" alt="Card image cap">
+                <img class="card-img-top card-top-cus" src="{{ asset('admin/'.$key[0]->image_film) }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ $key[0]->nama_film }}</h5>
                     <p class="card-text">{{ $key[0]->deskripsi_film }}</p>

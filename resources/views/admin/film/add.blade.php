@@ -27,7 +27,7 @@
                             <h4 class="m-b-0 text-white">Tambah Film</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('create.film') }}" method="post">
+                            <form action="{{ route('create.film') }}" enctype="multipart/form-data" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-6">
@@ -133,6 +133,16 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-body">
+                                    <div class="row p-t-10">
+                                        <div class="col-12">
+                                            <label class="card-title">Gambar Film</label>
+                                            <div class="form-group">
+                                                <input type="file" class="form-control" name="image_film" />
                                             </div>
                                         </div>
                                     </div>

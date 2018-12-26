@@ -8,10 +8,10 @@
     <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    {{-- <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script> --}}
     <title>Rekomendasi Film - Form Register</title>
 </head>
 <body>

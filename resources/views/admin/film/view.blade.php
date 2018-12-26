@@ -42,6 +42,7 @@
                                             <th>Produksi</th>
                                             <th>Negara</th>
                                             <th>Deskripsi</th>
+                                            <th>Image</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,6 +57,7 @@
                                             <td>{{ $films->produksi }}</td>
                                             <td>{{ $films->negara }}</td>
                                             <td>{{ $films->deskripsi_film }}</td>
+                                            <td><img style="width: 40%; height: auto;" src={{ $films->image_film }} /></td>
                                         </tr>
                                         @php $no++ @endphp
                                         @endforeach
