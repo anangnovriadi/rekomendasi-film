@@ -67,12 +67,29 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
 }
 
+.gross {
+  background: #f8f9fa;
+}
+
+.nav-inner {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .btn-tr {
   background: transparent;
   border: navajowhite;
   cursor: pointer;
   padding: 0;
   color: black !important;
+}
+
+.rad-cus {
+  border-radius: 55px 0 0 55px;
+}
+
+.rad-cus2 {
+  border-radius: 0 55px 55px 0;
 }
 
 /* Card */

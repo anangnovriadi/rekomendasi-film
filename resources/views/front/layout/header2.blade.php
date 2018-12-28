@@ -6,13 +6,26 @@
     </button>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto" id="nav">
-            <li class="nav-item">
+            <li class="nav-item nav-inner">
                 <a class="nav-link gray-d {{ Request::is('home') ? 'active-nav' : '' }}" href="/home">Home</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item nav-inner">
                 <a class="nav-link gray-d {{ Request::is('all-film') ? 'active-nav' : '' }}" href="{{ route('film') }}">Daftar Film</a>
             </li>
-            <li class="nav-item dropdown nav-item-left pl-0">
+            <li class="nav-item nav-inner">
+                <form action="{{ route('search.film') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                        <input type="text" name="qry" class="form-control rad-cus gross" placeholder="Search Film" />
+                        <div class="input-group-append">
+                            <button class="btn rad-cus2" type="submit" id="button-addon2">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+            <li class="nav-item nav-inner dropdown nav-item-left">
                 <div class="dropdown-menu shadow-medium" style="left: -38px;" aria-labelledby="dropdownMenuButton">
                     <a style="color: black;" class="dropdown-item text-left" href="{{ route('profile') }}">Profile</a>
                     <a class="dropdown-item text-left" href="#" style="text-transform: capitalize;">
