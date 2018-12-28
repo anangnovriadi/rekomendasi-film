@@ -15,7 +15,7 @@
                 <img class="card-img-top card-top-cus" src="{{ asset('admin/'.$value->image_film) }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ $value->nama_film }}</h5>
-                    <p class="card-text">{{ $value->deskripsi_film }}</p>
+                    <p class="card-text max-text">{{ $value->deskripsi_film }}</p>
                     <a href="#" class="btn btn-primary">Read more</a>
                 </div>
             </div>
