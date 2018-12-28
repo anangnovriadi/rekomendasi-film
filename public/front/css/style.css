@@ -3,10 +3,6 @@ body {
   background: #f5f5f5;
 }
 
-.active-nav {
-  color: white !important;
-}
-
 .shadow {
   box-shadow: 0 0 30px rgba(7, 51, 84, 0.17);
 }
@@ -23,7 +19,8 @@ body {
   color: #8f9aa5 !important;
 }
 
-.gray-d:hover {
+.gray-d:hover,
+.active-nav {
   color: white !important;
 }
 
