@@ -8,7 +8,7 @@ use App\Model\Film;
 class ListFilmController extends Controller
 {
     public function view() {
-        $all = Film::all();
-        return view('front.list-film', compact('all'));
+        $all = Film::paginate(4);
+        return view('front.list-all-film', compact('all'));
     }
 }

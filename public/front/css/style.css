@@ -63,11 +63,16 @@ body {
   border-radius: 3px 3px 0 0;
 }
 
+.shadow-medium {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
+}
+
 .btn-tr {
   background: transparent;
   border: navajowhite;
   cursor: pointer;
-  color: #8f9aa5 !important;
+  padding: 0;
+  color: black !important;
 }
 
 /* Card */
@@ -83,6 +88,10 @@ body {
 .max-text {
   max-height: 52px;
   overflow: hidden;
+}
+
+.page-cus .pagination {
+  justify-content: center;
 }
 
 .max-elips {

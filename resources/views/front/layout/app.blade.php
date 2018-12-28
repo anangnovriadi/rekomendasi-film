@@ -19,11 +19,14 @@
         </div>
         @include('front.layout.footer')
     </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script src="https://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
     <script>
         $(window).load(function() {
-            $(".se-pre-con").fadeOut(2200);
+            $(".se-pre-con").fadeOut(2000);
         });
     </script>
     @yield('add_js')

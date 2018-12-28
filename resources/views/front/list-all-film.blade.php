@@ -2,6 +2,10 @@
 
 @section('title', 'List Film')
 
+@section('name')
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" />    
+@endsection
+
 @section('content')
 
 <div class="container-cus">
@@ -24,6 +28,9 @@
             </div>
         </div>
         @endforeach
+    </div>
+    <div class="page-cus pt-4">
+        {{ $all->links() }}
     </div>
 </div>
 @endsection
