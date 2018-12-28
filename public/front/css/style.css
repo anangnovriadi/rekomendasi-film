@@ -19,6 +19,11 @@ body {
   color: #8f9aa5 !important;
 }
 
+.dropw:hover {
+  color: white !important;
+  background: #007bff !important;
+}
+
 .gray-d:hover,
 .active-nav {
   color: white !important;
@@ -78,6 +83,12 @@ body {
 .max-text {
   max-height: 52px;
   overflow: hidden;
+}
+
+.max-elips {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Footer */

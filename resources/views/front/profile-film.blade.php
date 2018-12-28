@@ -19,25 +19,25 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
                     <input type="hidden" name="id" value={{ $user->id }} />
-                    <input type="email" name="email" class="form-control" value={{ $user->email }} placeholder="Enter email" disabled>
+                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" placeholder="Enter email" disabled>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Firstname</label>
-                    <input type="text" name="firstname" class="form-control" value={{ $user->firstname }} placeholder="Enter Firstname">
+                    <input type="text" name="firstname" class="form-control" value="{{ $user->firstname }}" placeholder="Enter Firstname">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Lastname</label>
-                    <input type="text" name="lastname" class="form-control" value={{ $user->lastname }} placeholder="Enter Lastname">
+                    <input type="text" name="lastname" class="form-control" value="{{ $user->lastname }}" placeholder="Enter Lastname">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nama Film(Liked)</label>
-                    <input type="text" name="nama_film_liked" class="form-control" value={{ $user->nama_film_liked }} placeholder="Enter Nama Film(Liked)">
+                    <input type="text" name="nama_film_liked" class="form-control" value="{{ $user->nama_film_liked }}" placeholder="Enter Nama Film(Liked)">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Genre Film(Liked)</label>
-                    <input type="text" name="genre_film_liked" class="form-control" value={{ $user->genre_film_liked }} placeholder="Enter Genre Film(Liked)">
+                    <input type="text" name="genre_film_liked" class="form-control" value="{{ $user->genre_film_liked }}" placeholder="Enter Genre Film(Liked)">
                 </div>
             </div>
         </div>

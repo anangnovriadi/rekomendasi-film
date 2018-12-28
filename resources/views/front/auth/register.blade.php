@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {{-- <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script> --}}
     <title>Rekomendasi Film - Form Register</title>
 </head>
 <body>
@@ -39,21 +37,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama Film Yang Disukai</label>
-                                <input autocomplete="off" type="text" name="nama_film_liked" class="form-control" placeholder="Enter Nama Film Yang Disukai" required>
-                                {{-- <input autocomplete="off" type="text" name="nama_film_liked" id="nama_film" class="form-control input-lg" placeholder="Enter Nama Film" /> --}}
+                                <input autocomplete="off" type="text" name="nama_film_liked" id="nama_film" class="form-control" placeholder="Enter Nama Film Yang Disukai" required>
                             </div>
                             <div class="form-group">
                                 <label>Genre Yang Disukai</label>
-                                {{-- <input type="text" name="genre_film_liked" class="form-control" placeholder="Enter Genre Yang Disukai" required> --}}
-                                <input autocomplete="off" type="text" name="genre_film_liked" id="genre_film" class="form-control input-lg" placeholder="Enter Genre Film Yang Disukai" />
+                                <input autocomplete="off" type="text" name="genre_film_liked" id="genre_film" class="form-control input-lg" placeholder="Enter Genre Film Yang Disukai" required />
                                 <div id="genreList">
                                 </div>
                             </div>
-                            {{ csrf_field() }}
-                            {{-- <div class="form-group">
-                                <label>Deskripsi Film</label>
-                                <input type="text" name="deskripsi_film_liked" class="form-control" placeholder="Enter Deskripsi Film" required>
-                            </div> --}}
                             <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
@@ -84,7 +75,7 @@
                     url:"{{ route('autocomplete.fetch') }}",
                     method:"POST",
                     data:{query:query, _token:_token},
-                    success:function(data){
+                    success:function(data) {
                         $('#genreList').fadeIn();  
                         $('#genreList').html(data);
                     }

@@ -14,7 +14,10 @@
             <div class="card card-s">
                 <img class="card-img-top card-top-cus" src="{{ asset('admin/'.$key[0]->image_film) }}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $key[0]->nama_film }}</h5>
+                    <h5 class="card-title max-elips mb-2">{{ $key[0]->nama_film }}</h5>
+                    <div class="mb-2">
+                        <span class="badge badge-success">{{ $key[0]->genre }}</span>
+                    </div>
                     <p class="card-text max-text">{{ $key[0]->deskripsi_film }}</p>
                     <a href="#" class="btn btn-primary">Read more</a>
                 </div>
