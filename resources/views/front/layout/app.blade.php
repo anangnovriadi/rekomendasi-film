@@ -23,7 +23,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script>
         $(window).load(function() {
-            $(".se-pre-con").fadeOut(2400);
+            $(".se-pre-con").fadeOut(2200);
         });
     </script>
     @yield('add_js')

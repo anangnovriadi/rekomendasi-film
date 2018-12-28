@@ -1,7 +1,3 @@
-{{-- @php
-    dd(Request::is('home'))   
-@endphp --}}
-
 <nav class="navbar navbar-expand-lg fixed-top navbar-light shadow nav-cus">
     <img src="{{ asset('front/img/video-camera.png') }}" />
     <a style="padding-left: 12px; color: white;" class="navbar-brand" href="/home">Rekomendasi Film</a>

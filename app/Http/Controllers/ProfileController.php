@@ -59,8 +59,17 @@ class ProfileController extends Controller
         $genre_film_liked = trim(preg_replace('/\s+/', ' ', $genre_film_liked));
 
         $id = $request->input('id');
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
 
-        DB::table('users')->where('id', $id)->update(['nama_film_liked' => $nama_film_liked, 'genre_film_liked' => $genre_film_liked]);
+        DB::table('users')->where('id', $id)->update(
+            [
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'nama_film_liked' => $nama_film_liked, 
+                'genre_film_liked' => $genre_film_liked
+            ]
+        );
 
         return redirect()->route('home');
     }
