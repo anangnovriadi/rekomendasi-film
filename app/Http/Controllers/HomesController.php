@@ -91,7 +91,7 @@ class HomesController extends Controller
         });
 
         $take = $toFront->take(5);
-
+        
         return view('front.home-film', compact('take'));
     }
 

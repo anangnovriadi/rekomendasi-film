@@ -10,7 +10,7 @@
                 <a class="nav-link gray-d {{ Request::is('home') ? 'active-nav' : '' }}" href="/home">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link gray-d {{ Request::is('all-film') ? 'active-nav' : '' }}" href="{{ route('film') }}">Semua Film</a>
+                <a class="nav-link gray-d {{ Request::is('all-film') ? 'active-nav' : '' }}" href="{{ route('film') }}">Daftar Film</a>
             </li>
             <li class="nav-item dropdown nav-item-left pl-0">
                 <div class="dropdown-menu shadow-medium" style="left: -38px;" aria-labelledby="dropdownMenuButton">
