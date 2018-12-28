@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cos extends Model
 {
-    protected $table = 'coss';
+    protected $table = 'c_products';
     
     protected $fillable = [
-        'id_film', 'tf_idf_sum'
+        'id_film', 'tf_idf'
     ];
 }

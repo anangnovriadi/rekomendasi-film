@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cosine extends Model
 {
+    protected $table = 'd_products';
+    
     protected $fillable = [
-        'id_film', 'tf_idf_sum'
+        'id_film', 'tf_idf'
     ];
 }

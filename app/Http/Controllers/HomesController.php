@@ -18,137 +18,81 @@ class HomesController extends Controller
     {
         $countTable = DB::table('terms')->count();
 
-        if ($countTable > 1) {
-            $id_user = $this->getUser();
-
-            $d = DB::select('SELECT SUM(tf_idf) FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
-            $d = collect($d);
-            $d = $d->pluck('SUM(tf_idf)');
-
-            $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
-            $qTerm = collect($qTerm);
-
-            $q = DB::select('SELECT tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));
-            $q = collect($q);
-            $q = $q->pluck('tf_idf');
-
-            $com = $d->combine($qTerm);
-
-            $cos = $com->map(function ($item, $key) {
-                $id_user = $this->getUser();
-
-                $q = DB::select('SELECT tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));
-                $q = collect($q);
-                $q = $q->pluck('tf_idf');
-
-                $q = $q->pipe(function ($q) {
-                    return $q->sum();
-                });
-
-                $i = collect($item);
-                return $key / ($q * $i['tfidf']);
-            });
-
-            $keyCos = $cos->keys();
-
-            foreach ($keyCos as $coss) {
-                $cc = DB::select("SELECT id_film FROM coss WHERE tf_idf_sum_doc = '$coss'");
-
-                foreach ($cc as $ccs) {
-                    $all = DB::select("SELECT * FROM films WHERE id = '$ccs->id_film'");
-                }
-            }
-
-            $toFront = $keyCos->map(function ($item, $key) {
-                $cc = DB::select("SELECT id_film FROM coss WHERE tf_idf_sum_doc = '$item'");
-                return $cc;
-            });
-
-            $toFrontW = $toFront->map(function ($item, $key) {
-                return $item[0];
-            });
-
-            $to = $toFrontW->pluck('id_film');
-
-            $toFrontZ = $to->map(function ($item, $key) {
-                $all = DB::select("SELECT * FROM films WHERE id = '$item'");
-                return $all;
-            });
-
-            $sort = $toFrontZ->sort();
-            $take = $toFrontZ->take(5);
-
-            return view('front.home-film', compact('take'));
-        } else {
-            $id_user = $this->getUser();
-
+        $id_user = $this->getUser();
+        if($countTable < 1) {
             $this->toTfIdfKuadrat();
-            $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
+        }
 
-            foreach ($qTerm as $qTerms) {
-                DB::insert("INSERT INTO cosines(id, id_film, tf_idf_sum) values (null, '$qTerms->id_film', '$qTerms->tfidf')");
+        $d = DB::select('SELECT SUM(tf_idf) FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
+        $d = collect($d);
+        $d = $d->pluck('SUM(tf_idf)');
+
+        $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
+        $qTerm = collect($qTerm);
+
+        $q = DB::select('SELECT id_film, tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));
+        $q = collect($q);
+
+        $qFilm = DB::select('SELECT id_film, SUM(tf_idf) AS tf_idf FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
+        $vFilm = DB::select('SELECT id_film FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
+        $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
+        if ($countTable > 1) {
+            $getF = DB::select('SELECT id_film FROM c_products');
+            foreach ($getF as $get) {
+                $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
+                $qTerm = collect($qTerm);
+            }
+        } else {
+            foreach ($vFilm as $vFilms) {
+                DB::insert("INSERT INTO c_products(id, id_film, tf_idf) values (null, '$vFilms->id_film', 0)");
+                DB::insert("INSERT INTO d_products(id, id_film, tf_idf) values (null, '$vFilms->id_film', 0)");
             }
 
-            $d = DB::select('SELECT SUM(tf_idf) FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
-            $d = collect($d);
-            $d = $d->pluck('SUM(tf_idf)');
+            $getF = DB::select('SELECT id_film FROM c_products');
+            foreach ($getF as $get) {
+                $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
+                $qTerm = collect($qTerm);
 
-            $qTerm = collect($qTerm);
+                $qMap = $qTerm->map(function($item, $key) {
+                    DB::table('c_products')->where('id_film', $item->id_film)->update(['tf_idf' => $item->tfidf]);
+                });
+            }
+        }
+        
+        $getCProduct = DB::select('SELECT tf_idf FROM c_products');
+        $getCProduct = collect($getCProduct);
+        $getCProduct = $getCProduct->pluck('tf_idf');
+
+        $qFilm = collect($qFilm);
+        
+        $cos = $qFilm->map(function($item, $key) {
+            $id_user = $this->getUser();
 
             $q = DB::select('SELECT tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));
             $q = collect($q);
             $q = $q->pluck('tf_idf');
 
-            $com = $d->combine($qTerm);
-
-            $cos = $com->map(function ($item, $key) {
-                $id_user = $this->getUser();
-
-                $q = DB::select('SELECT tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));
-                $q = collect($q);
-                $q = $q->pluck('tf_idf');
-
-                $q = $q->pipe(function ($q) {
-                    return $q->sum();
-                });
-
-                $i = collect($item);
-
-                DB::insert("INSERT INTO coss(id, id_film, tf_idf_sum_doc) values (null, '$i[id_film]', '$key')");
-                return $key / ($q * $i['tfidf']);
+            $q = $q->pipe(function ($q) {
+                return $q->sum();
             });
+        
+            DB::table('d_products')->where('id_film', $item->id_film)->update(['tf_idf' => $item->tf_idf]);
 
-            $keyCos = $cos->keys();
+            return $item;
+        }); 
 
-            foreach ($keyCos as $coss) {
-                $cc = DB::select("SELECT id_film FROM coss WHERE tf_idf_sum_doc = '$coss'");
+        $getCosine = DB::select('SELECT c_products.id_film, (c_products.tf_idf / d_products.tf_idf) AS total_cosine FROM c_products JOIN d_products ON c_products.id_film = d_products.id_film ORDER by total_cosine DESC');
+        $getCosine = collect($getCosine);
 
-                foreach ($cc as $ccs) {
-                    $all = DB::select("SELECT * FROM films WHERE id = '$ccs->id_film'");
-                }
-            }
+        $toFront = $getCosine->map(function($item) {
+            $getCosineFix = DB::select("SELECT * FROM films WHERE id = '$item->id_film'");
 
-            $toFront = $keyCos->map(function ($item, $key) {
-                $cc = DB::select("SELECT id_film FROM coss WHERE tf_idf_sum_doc = '$item'");
-                return $cc;
-            });
+            return $getCosineFix;
+        });
 
-            $toFrontW = $toFront->map(function ($item, $key) {
-                return $item[0];
-            });
+        $take = $toFront->take(5);
 
-            $to = $toFrontW->pluck('id_film');
-
-            $toFrontZ = $to->map(function ($item, $key) {
-                $all = DB::select("SELECT * FROM films WHERE id = '$item'");
-                return $all;
-            });
-
-            $sort = $toFrontZ->sort();
-            $take = $toFrontZ->take(5);
-
-            return view('front.home-film', compact('take'));
-        }
+        return view('front.home-film', compact('take'));
     }
 
     // mendapatkan id user

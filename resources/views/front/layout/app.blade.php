@@ -8,6 +8,7 @@
     {{-- <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> --}}
      <link href="{{ asset('admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
+    @yield('add_css')
     <title>Rekomendasi Film - @yield('title')</title>
 </head>
 <body>
@@ -26,5 +27,6 @@
             $(".se-pre-con").fadeOut(4000);
         });
     </script>
+    @yield('add_js')
 </body>
 </html>
