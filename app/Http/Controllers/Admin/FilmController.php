@@ -45,7 +45,6 @@ class FilmController extends Controller
         $nama_film = Stemm::stemPhrase($nama_film, 'en');
         $nama_film = trim(preg_replace('/\s+/', ' ', $nama_film));
 
-
         // Genre
         $genre = $request->input('genre');
         $genre = strtolower($genre);
@@ -56,7 +55,6 @@ class FilmController extends Controller
         $genre = Stemm::stemPhrase($genre, 'en');
         $genre = trim(preg_replace('/\s+/', ' ', $genre));
 
-
         // Aktor/Aktris
         $aktor_aktris = $request->input('aktor_aktris');
         $aktor_aktris = strtolower($aktor_aktris);
@@ -66,7 +64,6 @@ class FilmController extends Controller
         $aktor_aktris = str_replace($stopword, '', $aktor_aktris);
         $aktor_aktris = Stemm::stemPhrase($aktor_aktris, 'en');
         $aktor_aktris = trim(preg_replace('/\s+/', ' ', $aktor_aktris));
-
 
         // Tahun
         $tahun = $request->input('tahun');
@@ -98,7 +95,6 @@ class FilmController extends Controller
         $negara = Stemm::stemPhrase($negara, 'en');
         $negara = trim(preg_replace('/\s+/', ' ', $negara));
 
-
         // Deskripsi Film
         $deskripsi_film = $request->input('deskripsi_film');
         $deskripsi_film = strtolower($deskripsi_film);
@@ -108,6 +104,9 @@ class FilmController extends Controller
         $deskripsi_film = str_replace($stopword, '', $deskripsi_film);
         $deskripsi_film = Stemm::stemPhrase($deskripsi_film, 'en');
         $deskripsi_film = trim(preg_replace('/\s+/', ' ', $deskripsi_film));
+
+        // Slug
+        $slug_name = str_slug($nama_film, '-');
 
         if ($request->hasFile('image_film')) {
             $image = $request->file('image_film');
@@ -119,13 +118,14 @@ class FilmController extends Controller
 
         Film::create([
             'nama_film' => $nama_film,
+            'slug' => $slug_name,
             'genre' => $genre,
             'aktor_aktris' => $aktor_aktris,
             'tahun' => $tahun,
             'produksi' => $produksi,
             'negara' => $negara,
             'deskripsi_film' => $deskripsi_film,
-            'image_film' => 'images/'.$name
+            'image_film' => 'images/'.$name,
         ]);
 
         return redirect()->route('create.film');

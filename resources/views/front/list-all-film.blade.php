@@ -23,7 +23,7 @@
                         <span class="badge badge-success">{{ $value->genre }}</span>
                     </div>
                     <p class="card-text max-text">{{ $value->deskripsi_film }}</p>
-                    <a href="#" class="btn btn-primary">Read more</a>
+                    <a href="/detail-film/{{ $value->nama_slug }}" class="btn btn-primary">Read more</a>
                 </div>
             </div>
         </div>
