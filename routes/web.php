@@ -44,6 +44,7 @@ Route::get('/home', 'HomesController@view')->name('home');
 Route::get('/profile', 'ProfileController@view')->name('profile');
 Route::post('/profile', 'ProfileController@update')->name('edit.profile');
 Route::get('/all-film', 'ListFilmController@view')->name('film');
+Route::get('/detail-film/{id}', 'ListFilmController@detail')->name('detail.film');
 Route::any('/search-film', 'SearchController@search')->name('search.film');
 
 Route::get('/autocomplete', 'AutoComplete@index');
