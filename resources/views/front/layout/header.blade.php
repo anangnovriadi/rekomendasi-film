@@ -12,6 +12,9 @@
             <li class="nav-item active">
                 <a class="nav-link gray-d" href="{{ route('all-film') }}">Semua Film</a>
             </li>
+            <li class="nav-item active">
+                    <a class="nav-link gray-d" href="{{ route('profile') }}">Profile</a>
+                </li>
             <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}">
                     {{ csrf_field() }}

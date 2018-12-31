@@ -25,6 +25,7 @@ class HomesController extends Controller
             $d = collect($d);
             $d = $d->pluck('SUM(tf_idf)');
 
+            $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
             $qTerm = collect($qTerm);
 
             $q = DB::select('SELECT tf_idf from tf_idfs WHERE id_user >= ?', array($id_user));

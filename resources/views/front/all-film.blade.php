@@ -1,6 +1,6 @@
 @extends('front.layout.app')
 
-@section('title', 'Home')
+@section('title', 'Film')
 
 @section('content')
 

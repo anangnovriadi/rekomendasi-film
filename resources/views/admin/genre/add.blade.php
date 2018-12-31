@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('pageTitle', 'Genre Film')
+@section('pageTitle', 'Add Genre')
 
 @section('content')
 
