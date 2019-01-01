@@ -37,15 +37,15 @@ class HomesController extends Controller
         $vFilm = DB::select('SELECT id_film FROM tf_idfs WHERE id_film >= 1 GROUP BY id_film');
         $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
         if ($countTable > 1) {
-            $getF = DB::select('SELECT id_film FROM c_products');
+            $getF = DB::select('SELECT id_film FROM d_products');
             foreach ($getF as $get) {
                 $qTerm = DB::select("SELECT parent.id_film, sum(parent.tf_idf_kuadrat) AS tfidf FROM tf_idfs AS tf_idfs JOIN tf_idfs AS parent ON parent.id_term = tf_idfs.id_term WHERE tf_idfs.id_user = '$id_user' AND parent.id_film >= 1 GROUP BY parent.id_film");
                 $qTerm = collect($qTerm);
             }
         } else {
             foreach ($vFilm as $vFilms) {
-                DB::insert("INSERT INTO c_products(id, id_film, tf_idf) values (null, '$vFilms->id_film', 0)");
                 DB::insert("INSERT INTO d_products(id, id_film, tf_idf) values (null, '$vFilms->id_film', 0)");
+                DB::insert("INSERT INTO c_products(id, id_film, tf_idf) values (null, '$vFilms->id_film', 0)");
             }
 
             $getF = DB::select('SELECT id_film FROM c_products');
@@ -54,14 +54,10 @@ class HomesController extends Controller
                 $qTerm = collect($qTerm);
 
                 $qMap = $qTerm->map(function($item, $key) {
-                    DB::table('c_products')->where('id_film', $item->id_film)->update(['tf_idf' => $item->tfidf]);
+                    DB::table('d_products')->where('id_film', $item->id_film)->update(['tf_idf' => $item->tfidf]);
                 });
             }
         }
-        
-        $getCProduct = DB::select('SELECT tf_idf FROM c_products');
-        $getCProduct = collect($getCProduct);
-        $getCProduct = $getCProduct->pluck('tf_idf');
 
         $qFilm = collect($qFilm);
         
@@ -75,13 +71,18 @@ class HomesController extends Controller
             $q = $q->pipe(function ($q) {
                 return $q->sum();
             });
+
+            $q = sqrt($q);
+            $tfidf = sqrt($item->tf_idf);
+
+            $tCproduct = $q * $tfidf;
         
-            DB::table('d_products')->where('id_film', $item->id_film)->update(['tf_idf' => $item->tf_idf]);
+            DB::table('c_products')->where('id_film', $item->id_film)->update(['tf_idf' => $tCproduct]);
 
             return $item;
         }); 
 
-        $getCosine = DB::select('SELECT c_products.id_film, (c_products.tf_idf / d_products.tf_idf) AS total_cosine FROM c_products JOIN d_products ON c_products.id_film = d_products.id_film ORDER by total_cosine DESC');
+        $getCosine = DB::select('SELECT d_products.id_film, (d_products.tf_idf / c_products.tf_idf) AS total_cosine FROM d_products JOIN c_products ON d_products.id_film = c_products.id_film ORDER by total_cosine DESC');
         $getCosine = collect($getCosine);
 
         $toFront = $getCosine->map(function($item) {

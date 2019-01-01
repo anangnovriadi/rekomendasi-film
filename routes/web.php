@@ -46,6 +46,7 @@ Route::post('/profile', 'ProfileController@update')->name('edit.profile');
 Route::get('/all-film', 'ListFilmController@view')->name('film');
 Route::get('/detail-film/{slug}', 'ListFilmController@detail')->name('detail.film');
 Route::any('/search-film', 'SearchController@search')->name('search.film');
+Route::get('/knn', 'KnnController@index');
 
 Route::get('/autocomplete', 'AutoComplete@index');
 Route::post('/autocomplete/fetch', 'AutoComplete@fetch')->name('autocomplete.fetch');
