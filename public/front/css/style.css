@@ -42,6 +42,11 @@ body {
   background: #2f3d4a;
 }
 
+.form-cus {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .content-inner {
   max-width: 450px;
   background: white;
@@ -102,6 +107,10 @@ body {
   max-height: 180px;
 }
 
+.label-info {
+  background-color: #5bc0de;
+}
+
 .card-s {
   -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
@@ -154,4 +163,12 @@ body {
   height: 100%;
   z-index: 9999;
   background: url("/front/img/loader3.gif") center no-repeat #fff;
+}
+
+.tagify tag>div::before {
+  background: #e5e5e5;
+}
+
+.tagify__input::before {
+  top: 3px !important;
 }

@@ -118,7 +118,7 @@ class FilmController extends Controller
 
         Film::create([
             'nama_film' => $nama_film,
-            'slug' => $slug_name,
+            'nama_slug' => $slug_name,
             'genre' => $genre,
             'aktor_aktris' => $aktor_aktris,
             'tahun' => $tahun,
@@ -126,9 +126,11 @@ class FilmController extends Controller
             'negara' => $negara,
             'deskripsi_film' => $deskripsi_film,
             'image_film' => 'images/'.$name,
+            'rating' => '0',
+            'kelas' => ''
         ]);
 
-        return redirect()->route('create.film');
+        return redirect()->route('view.film');
     }
 
     public function view()

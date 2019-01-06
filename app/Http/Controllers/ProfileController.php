@@ -8,6 +8,7 @@ use App\Model\Cosine;
 use App\Model\Term;
 use App\Model\Tf_idf;
 use App\Model\Cos;
+use App\Model\Film;
 use DB;
 use Nadar\Stemming\Stemm;
 use voku\helper\StopWords;
@@ -17,7 +18,10 @@ class ProfileController extends Controller
     public function view()
     {
         $user = Auth::user();
-        return view('front.profile-film', compact('user'));
+        $nama_film = Film::all('nama_film')->pluck('nama_film')->toArray();
+        $genre_film = Film::all('genre')->unique('genre')->pluck('genre')->toArray();
+
+        return view('front.profile-film', compact('user', 'nama_film', 'genre_film'));
     }
 
     public function update(Request $request) 

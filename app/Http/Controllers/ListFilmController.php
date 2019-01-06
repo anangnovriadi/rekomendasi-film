@@ -9,7 +9,7 @@ use DB;
 class ListFilmController extends Controller
 {
     public function view() {
-        $all = Film::paginate(4);
+        $all = Film::paginate(8);
         return view('front.list-all-film', compact('all'));
     }
 
