@@ -14,6 +14,7 @@
 <body>
     <div class="se-pre-con"></div>
     <div>
+        @include('sweetalert::alert')`
         @include('front.layout.header2')
         <div>
             @yield('content')

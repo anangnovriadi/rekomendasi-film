@@ -8,6 +8,11 @@ use DB;
 
 class ListFilmController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function view() {
         $all = Film::paginate(8);
         return view('front.list-all-film', compact('all'));

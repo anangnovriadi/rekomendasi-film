@@ -12,9 +12,15 @@ use App\Model\Film;
 use DB;
 use Nadar\Stemming\Stemm;
 use voku\helper\StopWords;
+use Alert;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function view()
     {
         $user = Auth::user();
@@ -74,6 +80,8 @@ class ProfileController extends Controller
                 'genre_film_liked' => $genre_film_liked
             ]
         );
+
+        Alert::success('Success', 'Success Update Profile');
 
         return redirect()->route('home');
     }

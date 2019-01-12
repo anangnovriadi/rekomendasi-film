@@ -37,13 +37,17 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama Film Yang Disukai</label>
-                                <input autocomplete="off" type="text" name="nama_film_liked" id="nama_film" class="form-control" placeholder="Enter Nama Film Yang Disukai" required>
+                                <input type="text" name="nama_film_liked" id="nama_film" class="form-control" placeholder="Enter Nama Film Yang Disukai" required>
                             </div>
                             <div class="form-group">
                                 <label>Genre Yang Disukai</label>
-                                <input autocomplete="off" type="text" name="genre_film_liked" id="genre_film" class="form-control input-lg" placeholder="Enter Genre Film Yang Disukai" required />
-                                <div id="genreList">
+                                <input type="text" name="genre_film_liked" id="genre_film" class="form-control input-lg" placeholder="Enter Genre Film Yang Disukai" required />
+                                {{-- <div id="genreList"> --}}
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Aktor / Aktris Film Yang Disukai</label>
+                                <input autocomplete="off" type="text" name="aktor_aktris_liked" id="aktor_aktris_liked" class="form-control" placeholder="Enter Aktor / Aktris Film Yang Disukai" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>

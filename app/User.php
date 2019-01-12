@@ -16,7 +16,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'firstname', 'lastname', 'email', 'password', 
-        'nama_film_liked', 'genre_film_liked', 'deskripsi_film_liked'
+        'nama_film_liked', 'genre_film_liked', 'deskripsi_film_liked',
+        'aktor_aktris_liked'
     ];
 
     /**

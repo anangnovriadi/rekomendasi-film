@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Sastrawi\Tokenizer\TokenizerFactory;
 use DB;
+use App\Model\Film;
 
 class HomesController extends Controller
 {
@@ -16,6 +17,7 @@ class HomesController extends Controller
 
     public function view()
     {
+        set_time_limit(0);
         $countTable = DB::table('terms')->count();
 
         $id_user = $this->getUser();
@@ -95,9 +97,16 @@ class HomesController extends Controller
             return $getCosineFix;
         });
 
-        $take = $toFront->take(5);
+        // $take = $toFront->take(2);
+        $take = $toFront->take(4);
+        $takeGenre = $toFront->sortKeysDesc()->take(3);
+        $pop = DB::select("SELECT * FROM films ORDER BY id DESC"); 
+        $pop = collect($pop);
+        $pop = $pop->take(5);
+        $popOne = $pop->take(1);
         
-        return view('front.home-film', compact('take'));
+        // return view('front.home-film', compact('take', 'takeGenre', 'popOne', 'pop'));
+        return view('front.home-film', compact('take', 'popOne', 'pop'));
     }
 
     // mendapatkan id user
@@ -126,7 +135,8 @@ class HomesController extends Controller
         foreach ($user as $users) {
             $nama_film = $tokenizer->tokenize($users->nama_film_liked);
             $genre_film = $tokenizer->tokenize($users->genre_film_liked);
-            $mergeAll = array_merge($nama_film, $genre_film);
+            $aktor = $tokenizer->tokenize($users->aktor_aktris_liked);
+            $mergeAll = array_merge($nama_film, $genre_film, $aktor);
         }
 
         return $mergeAll;
@@ -165,8 +175,9 @@ class HomesController extends Controller
             $id_film = $allFilm->id;
             $nama_film = $tokenizer->tokenize($allFilm->nama_film);
             $genre_film = $tokenizer->tokenize($allFilm->genre);
+            $aktor_aktris = $tokenizer->tokenize($allFilm->aktor_aktris);
 
-            $mergeAll = array_merge($nama_film, $genre_film);
+            $mergeAll = array_merge($nama_film, $genre_film, $aktor_aktris);
             foreach ($mergeAll as $terms) {
                 if (strlen($terms) !== 0) {
                     $cekTerm = DB::table('terms')->where('nama_term', '=', $terms)->count();

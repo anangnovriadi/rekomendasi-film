@@ -1,6 +1,7 @@
 @extends('front.layout.app')
 
 @section('add_css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('front/tagify/tagify.css') }}">
 @endsection
 
@@ -8,9 +9,6 @@
 
 @section('content')
 
-@php
-print_r($nama_film)
-@endphp 
 <div class="container-cus">
     <div class="pb-4">
         <h4 class="gray-g">My Profile</h4>
@@ -22,15 +20,15 @@ print_r($nama_film)
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
                     <input type="hidden" name="id" value={{ $user->id }} />
-                    <input type="email" name="email" class="form-control form-cus" value="{{ $user->email }}" placeholder="Enter email" disabled>
+                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" placeholder="Enter email" disabled>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Firstname</label>
-                    <input type="text" name="firstname" class="form-control form-cus" value="{{ $user->firstname }}" placeholder="Enter Firstname">
+                    <input type="text" name="firstname" class="form-control" value="{{ $user->firstname }}" placeholder="Enter Firstname">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Lastname</label>
-                    <input type="text" name="lastname" class="form-control form-cus" value="{{ $user->lastname }}" placeholder="Enter Lastname">
+                    <input type="text" name="lastname" class="form-control" value="{{ $user->lastname }}" placeholder="Enter Lastname">
                 </div>
             </div>
             <div class="col-md-4">
@@ -109,7 +107,8 @@ print_r($nama_film)
     })()
 </script>
 
-<script data-name="input">
+        
+<script data-name="textarea">
     (function(){
     var input = document.querySelector('input[name=nama_film_liked]'),
         tagify = new Tagify(input, {
@@ -120,7 +119,6 @@ print_r($nama_film)
                 remove : console.log
             }
         });
-
     var inputGenre = document.querySelector('input[name=genre_film_liked]'),
         tagify = new Tagify(inputGenre, {
             enforceWhitelist : true,

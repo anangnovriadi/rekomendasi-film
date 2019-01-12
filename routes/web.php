@@ -49,6 +49,7 @@ Route::get('/detail-film/{slug}', 'ListFilmController@detail')->name('detail.fil
 Route::any('/search-film', 'SearchController@search')->name('search.film');
 Route::get('/knn', 'KnnController@index');
 Route::get('/cross', 'KnnController@crossValidation');
+Route::get('/coming-soon', 'CommingSoonController@view')->name('coming.film');
 
 
 Route::get('/autocomplete', 'AutoComplete@index');

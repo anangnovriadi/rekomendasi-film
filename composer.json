@@ -13,6 +13,7 @@
         "laravel/tinker": "^1.0",
         "nadar/stemming": "^1.0",
         "php-ai/php-ml": "^0.7.0",
+        "realrashid/sweet-alert": "^1.1",
         "sastrawi/tokenizer": "0.*",
         "voku/stop-words": "^2.0",
         "wamania/php-stemmer": "^1.2"
