@@ -9,6 +9,6 @@ class Film extends Model
     protected $fillable = [
         'nama_film', 'genre', 'aktor_aktris', 'nama_slug',
         'tahun', 'produksi', 'negara', 'deskripsi_film', 'image_film',
-        'rating', 'kelas', 'coming'
+        'rating', 'kelas', 'coming', 'type_movie'
     ];
 }

@@ -104,7 +104,8 @@ body {
 
 /* Card */
 .card-top-cus {
-  max-height: 320px;
+  max-height: 325px;
+  min-height: 325px;
 }
 
 .label-info {

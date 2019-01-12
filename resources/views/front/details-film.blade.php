@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <img class="img-responsive card-s" style="max-height: 414px;min-height: 414px;" src="{{ asset('admin/'.$film[0]->image_film) }}">            
+            <img class="img-responsive card-s" style="max-height: 500px; min-height: 500px;" src="{{ asset('admin/'.$film[0]->image_film) }}">            
         </div>
         <div class="col-md-8">
             <div class="pb-1">
@@ -45,6 +45,11 @@
             <div class="pb-1">
                 <div class="alert alert-primary p-2" role="alert">
                     <strong class="gray-g">Produksi:</strong> {{ $film[0]->produksi }}
+                </div>
+            </div>
+            <div class="pb-1">
+                <div class="alert alert-primary p-2" role="alert">
+                    <strong class="gray-g">Rating:</strong> {{ $film[0]->rating }}
                 </div>
             </div>
             <div class="pb-1">

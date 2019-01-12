@@ -108,6 +108,12 @@ class FilmController extends Controller
         // Slug
         $slug_name = str_slug($nama_film, '-');
 
+        // Rating
+        $rating = $request->input('rating');
+
+        // Type
+        $type_movie = $request->input('type_movie');
+
         if ($request->hasFile('image_film')) {
             $image = $request->file('image_film');
             $name = str_slug($image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
@@ -126,8 +132,9 @@ class FilmController extends Controller
             'negara' => $negara,
             'deskripsi_film' => $deskripsi_film,
             'image_film' => 'images/'.$name,
-            'rating' => '0',
-            'kelas' => ''
+            'rating' => $rating,
+            'type_movie' => $type_movie,
+            'kelas' => $rating > 5 ? 'y' : 't'
         ]);
 
         return redirect()->route('view.film');

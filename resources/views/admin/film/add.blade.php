@@ -137,6 +137,41 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-body">
+                                            <div class="row p-t-10">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Rating</label>
+                                                        <input type="text" name="rating" class="form-control" placeholder="Rating">
+                                                        @if($errors->first('negara'))
+                                                            <div class="mb-3">
+                                                                <small class="form-control-feedback" style="color: red">{{ $errors->first('rating') }}</small>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-body">
+                                            <div class="row p-t-10">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Input Select</label>
+                                                        <select name="type_movie" class="custom-select col-12">
+                                                            <option value="" selected="">Choose...</option>
+                                                            <option value="coming soon">Coming Soon</option>
+                                                            <option value="realesed">Realesed</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-body">
                                     <div class="row p-t-10">
                                         <div class="col-12">

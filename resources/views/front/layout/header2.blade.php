@@ -13,6 +13,9 @@
                 <a class="nav-link gray-d {{ Request::is('all-film') ? 'active-nav' : '' }}" href="{{ route('film') }}">Daftar Film</a>
             </li>
             <li class="nav-item nav-inner">
+                <a class="nav-link gray-d {{ Request::is('coming-soon') ? 'active-nav' : '' }}" href="{{ route('coming.film') }}">Coming Soon</a>
+            </li>
+            <li class="nav-item nav-inner">
                 <form action="{{ route('search.film') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="input-group">
