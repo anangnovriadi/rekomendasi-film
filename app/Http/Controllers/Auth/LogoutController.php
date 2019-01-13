@@ -8,6 +8,7 @@ use App\Model\Cosine;
 use App\Model\Term;
 use App\Model\Tf_idf;
 use App\Model\Cos;
+use DB;
 
 class LogoutController extends Controller 
 {
@@ -19,6 +20,8 @@ class LogoutController extends Controller
         Term::query()->truncate();
         Cosine::query()->truncate();
         Cos::query()->truncate();
+        DB::table('k_optimals')->truncate();
+        DB::table('kelas_selected')->truncate();
 
         return redirect()->route('login');
     }

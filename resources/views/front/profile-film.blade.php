@@ -34,7 +34,8 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nama Film(Liked)</label>
-                    <input type="text" name="nama_film_liked" class="form-control" value="{{ preg_replace('/\s+/',', ',str_replace(array("\r\n","\r","\n"),' ',trim($user->nama_film_liked))) }}" placeholder="Nama Film">
+                    <input type="text" name="nama_film_liked" class="form-control" value="{{ $user->nama_film_liked }}" placeholder="Nama Film">
+                    {{-- <input type="text" name="nama_film_liked" class="form-control" value="{{ preg_replace('/\s+/',', ',str_replace(array("\r\n","\r","\n"),' ',trim($user->nama_film_liked))) }}" placeholder="Nama Film"> --}}
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Genre Film(Liked)</label>
@@ -110,15 +111,15 @@
         
 <script data-name="textarea">
     (function(){
-    var input = document.querySelector('input[name=nama_film_liked]'),
-        tagify = new Tagify(input, {
-            enforceWhitelist : true,
-            whitelist        : {!! json_encode($nama_film) !!},
-            callbacks        : {
-                add    : console.log, 
-                remove : console.log
-            }
-        });
+    // var input = document.querySelector('input[name=nama_film_liked]'),
+    //     tagify = new Tagify(input, {
+    //         enforceWhitelist : true,
+    //         whitelist        : {!! json_encode($nama_film) !!},
+    //         callbacks        : {
+    //             add    : console.log, 
+    //             remove : console.log
+    //         }
+    //     });
     var inputGenre = document.querySelector('input[name=genre_film_liked]'),
         tagify = new Tagify(inputGenre, {
             enforceWhitelist : true,

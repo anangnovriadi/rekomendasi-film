@@ -88,25 +88,54 @@ class HomesController extends Controller
             return $item;
         }); 
 
+        $command = escapeshellcmd('/Project-Ku/rekomendasi-film(python)/kf_cross.py');
+        $exec = shell_exec('python '.$command);
+
         $getCosine = DB::select('SELECT c_products.id_film, (c_products.tf_idf / d_products.tf_idf) AS total_cosine FROM c_products JOIN d_products ON c_products.id_film = d_products.id_film ORDER by total_cosine DESC');
         $getCosine = collect($getCosine);
-
+        $getCosine = $getCosine->take(10); // K-Optimal
+        
         $toFront = $getCosine->map(function($item) {
             $getCosineFix = DB::select("SELECT * FROM films WHERE id = '$item->id_film'");
 
-            return $getCosineFix;
+            return $getCosineFix[0];
         });
 
-        // $take = $toFront->take(2);
-        $take = $toFront->take(4);
-        $takeGenre = $toFront->sortKeysDesc()->take(3);
-        $pop = DB::select("SELECT * FROM films ORDER BY id DESC"); 
-        $pop = collect($pop);
-        $pop = $pop->take(5);
-        $popOne = $pop->take(1);
+        $pl = $toFront->pluck('id');
+        $pl = collect($pl)->implode(',');
+        $sel = DB::select("SELECT SUM(IF(kelas='y',1,0)) AS yes, SUM(IF(kelas='t',1,0)) AS no, COUNT(*) AS jum FROM films WHERE id IN ($pl)");
+        $sel = collect($sel);
+
+        if($sel->pluck('yes') > $sel->pluck('no')) {
+            $kelas = 'y';
+        } else {
+            $kelas = 't';
+        }
+
+        $jumlah = $sel[0]->jum;
+        $countTableKelas = DB::table('kelas_selected')->count();
+
+        if($countTableKelas < 1) {
+            DB::insert("INSERT INTO kelas_selected(id, kelas, jumlah) values ('', '$kelas', '$jumlah')");
+        }
+
+        $toFrontFix = $getCosine->map(function($item) {
+            $kelas = DB::select("SELECT kelas FROM kelas_selected");
+            $kelas = collect($kelas);
+            $kelas = $kelas->pluck('kelas');
+            $kelas = $kelas->implode('kelas', '');
+
+            $KnnFix = DB::select("SELECT * FROM films WHERE id = '$item->id_film' AND kelas = '$kelas'");
+
+            return $KnnFix;
+        });
+
+        $take = $toFrontFix->filter();
+        $fil = $take->count();
+
+        DB::table('kelas_selected')->where('kelas', $kelas)->update(['jumlah' => $fil]);
         
-        // return view('front.home-film', compact('take', 'takeGenre', 'popOne', 'pop'));
-        return view('front.home-film', compact('take', 'popOne', 'pop'));
+        return view('front.home-film', compact('take'));
     }
 
     // mendapatkan id user

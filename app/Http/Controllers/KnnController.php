@@ -46,22 +46,48 @@ class KnnController extends Controller
     //     dd($randomSplit);
     // }
 
+    // public function index() {
+    //     $knn = DB::select('SELECT c_products.id_film, ( d_products.tf_idf / c_products.tf_idf) 
+    //             AS total_cosine,films.kelas FROM c_products 
+    //                 JOIN d_products ON c_products.id_film = d_products.id_film 
+    //                     JOIN films ON c_products.id_film = films.id ORDER BY total_cosine DESC LIMIT 8');
+
+    //     $knn = collect($knn);
+    //     $relevan = $knn->where('kelas', 'y')->count();
+    //     $notRelevan = $knn->where('kelas', 't')->count();
+    //     $precission = ($relevan / ($relevan + $notRelevan)) * 100;
+    //     $recall = ($relevan / ($relevan + 0)) * 100;
+    //     $accuracy = ($relevan + 0 / ($relevan + 0 + 5 + 0)) * 10;
+
+    //     $fscore = 2 * ($precission * $recall / $precission + $recall) / 10;
+
+    //     dd($precission, $recall, $accuracy, $fscore);
+    // }
+
     public function index() {
-        $knn = DB::select('SELECT c_products.id_film, ( d_products.tf_idf / c_products.tf_idf) 
-                AS total_cosine,films.kelas FROM c_products 
-                    JOIN d_products ON c_products.id_film = d_products.id_film 
-                        JOIN films ON c_products.id_film = films.id ORDER BY total_cosine DESC LIMIT 8');
+        $totalFilm = DB::select('SELECT * FROM films');
+        $totalFilm = collect($totalFilm)->count();
 
-        $knn = collect($knn);
-        $relevan = $knn->where('kelas', 'y')->count();
-        $notRelevan = $knn->where('kelas', 't')->count();
-        $precission = ($relevan / ($relevan + $notRelevan)) * 100;
-        $recall = ($relevan / ($relevan + 0)) * 100;
-        $accuracy = ($relevan + 0 / ($relevan + 0 + 5 + 0)) * 10;
+        $kOptimal = DB::select('SELECT k FROM `k_optimals` ORDER BY accuracy_k DESC, k DESC LIMIT 1');
+        $kOptimal = collect($kOptimal);
+        $kOptimal = $kOptimal->pluck('k');
 
-        $fscore = 2 * ($precission * $recall / $precission + $recall) / 10;
+        $kTrue = DB::select('SELECT jumlah FROM `kelas_selected`');
+        $kTrue = collect($kTrue);
+        $kTrue = $kTrue->pluck('jumlah');
 
-        dd($precission, $recall, $accuracy, $fscore);
+        $tp = $kTrue[0];
+        $fp = $kOptimal[0] - $tp;
+        $fn = $kOptimal[0] - $fp;
+        $tn = $totalFilm - $fp;
+
+        $precission = $tp / ($tp + $fp);
+        $recall = $tp / ($tp + $fn);
+        $accuracy = ($tp + $tn) / ($tp + $tn + $fp + $fn);
+        $fscore = 2 * ($precission * $recall / $precission + $recall);
+
+
+        dd($precission * 100, $recall * 100, $accuracy * 100, $fscore * 10);
     }
 
     // public function index() {
