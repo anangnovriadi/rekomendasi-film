@@ -77,17 +77,18 @@ class KnnController extends Controller
         $kTrue = $kTrue->pluck('jumlah');
 
         $tp = $kTrue[0];
-        $fp = $kOptimal[0] - $tp;
-        $fn = $kOptimal[0] - $fp;
-        $tn = $totalFilm - $fp;
+        $fn = abs($kOptimal[0] - $tp);
+        $fp = abs($kOptimal[0] - $fn);
+        // $tn = $totalFilm - $fp;
+        $tn = 100 - $fn;
 
         $precission = $tp / ($tp + $fp);
         $recall = $tp / ($tp + $fn);
         $accuracy = ($tp + $tn) / ($tp + $tn + $fp + $fn);
-        $fscore = 2 * ($precission * $recall / $precission + $recall);
+        $fscore = 2 * ($precission * $recall) / ($precission + $recall);
 
 
-        dd($precission * 100, $recall * 100, $accuracy * 100, $fscore * 10);
+        dd($tp, $fp, $fn, $tn, $precission * 100, $recall * 100, $accuracy * 100, $fscore * 100);
     }
 
     // public function index() {
