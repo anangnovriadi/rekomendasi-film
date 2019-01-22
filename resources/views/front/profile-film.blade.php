@@ -45,7 +45,7 @@
         </div>
         <div class="pt-3">
             <div class="form-group">
-                <button type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Loading" class="btn btn-primary">Edit Profile</button>
+                <button type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Memproses" class="btn btn-primary">Edit Profile</button>
             </div>
         </div>
     </form>

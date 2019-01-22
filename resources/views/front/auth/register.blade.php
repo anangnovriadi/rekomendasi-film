@@ -53,7 +53,7 @@
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
-                            <button type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Loading" class="btn btn-primary">Submit</button>                            
+                            <button type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Memproses" class="btn btn-primary">Submit</button>                            
                             <div class="pt-4">
                                 <span>
                                     <p class="gray">Sudah punya akun, login <a href="/login">disini</a></p>
