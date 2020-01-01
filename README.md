@@ -1,2 +1,2 @@
 # rekomendasi-film
-Rekomendasi Film(Metode Cosine Similarity and K-NN)
+Rekomendasi Film (Menggunakan Metode Cosine Similarity and K-NN)
